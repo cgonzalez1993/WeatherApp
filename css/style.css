@@ -1,0 +1,122 @@
+.navBar {
+    background-color: #2E2E2E;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.searchText {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    font-weight: normal;
+    color: #A5A5A5;
+}
+
+.header {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 51px;
+}
+
+.favBtn {
+    background-color: #F8C898;
+    border-radius: 10px;
+    width: 262px;
+    height: 66px;
+}
+
+.favBtn:hover {
+    background-color: #f1dcc7;
+    border-color: #f1dcc7;
+}
+
+.favBtn:focus {
+    background-color: #eb9b23;
+    border-color: #eb9b23;
+    color: black;
+}
+
+.searchBtn {
+    background-color: white;
+    border: none;
+}
+
+.searchForm {
+    border: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.addbtnFav {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+.dayTimeBG {
+    background-color: #D2FCFF;
+}
+
+.weatherBorders {
+    border-bottom: solid black 1px;
+}
+
+.detailWeather {
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.fa-search {
+    color: #A5A5A5;
+}
+
+.tempNow {
+    font-size: 154px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.aqi {
+    color: #1EAE00;
+    font-weight: bold;
+}
+
+.cityName {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.todayDate {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+.subtitle {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 33px;
+    font-weight: normal;
+}
+
+.sunSetting {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 29px;
+    font-weight: normal;
+}
+
+.sun {
+    color: #FFB061;
+}
+
+.end {
+    display: flex;
+    align-items: flex-end;
+}
+
+.noPadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.cardOutline {
+    border-color: black;
+}
