@@ -21,6 +21,7 @@ Desktop Weather Application
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
     <title>Weather Thingy</title>
 </head>
 
@@ -87,22 +88,26 @@ Desktop Weather Application
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <p class="px-3 cityName mt-3" id="todayDate">Manteca, CA</p>
+                                    <p class="px-3 cityName mt-3" id="location">Manteca, CA</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 mb-">
-                                    <p class="px-3 tempNow" id="todayDate"><i data-feather="sun" style="width: 180px; height: 180px" class="mb-4 sun"></i>&nbsp;55°F</p>
+                                <div class="col-2">
+                                    <ion-icon name="sunny" style="width: 200px; height: 200px" class="sun mt-4"></ion-icon>
+                                </div>
+                                <div class="col-10">
+                                    <p class="px-3 noPadding tempNow" id="todayTemp">&nbsp;55°F</p>
+
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <p class="px-3 sunSetting" id="todaySR"><i data-feather="sunrise" style="width: 40px; height: 40px" class="mb-3"></i>&nbsp; Sunrise - 7:08am</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <p class="px-3 sunSetting" id="todayDate"><i data-feather="sunrise" style="width: 40px; height: 40px" class="mb-3"></i>&nbsp; Sunrise - 7:08am</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <p class="px-3 sunSetting" id="todayDate"><i data-feather="sunset" style="width: 40px; height: 40px"class="mb-3"></i>&nbsp; Sunset - 4:45pm</p>
+                                    <p class="px-3 sunSetting" id="todaySS"><i data-feather="sunset" style="width: 40px; height: 40px"class="mb-3"></i>&nbsp; Sunset - 4:45pm</p>
                                 </div>
                             </div>
                             <br>
@@ -208,41 +213,38 @@ Desktop Weather Application
             <div class="col-6">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card cardOutline">
+                        <div class="card cardOutline ">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2>Today's Forecast:</h2>
+                                        <h2 class="subtitle">Today's Forecast:</h2>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5 mb-5">Morning</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-
+                                                <ion-icon class="weatherIconCloud" name="partly-sunny" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5 mb-5">Afternoon</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
-
+                                                <ion-icon class="sun" name="sunny" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5 mb-5">Evening</p>
                                             </div>
                                         </div>
                                     </div>
@@ -255,7 +257,7 @@ Desktop Weather Application
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2>Today's Forecast:</h2>
+                                        <h2 class="subtitle">5-Day Forecast:</h2>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -263,9 +265,10 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5">Tues.</p>
+                                                <p class="cardDate">12/8/20</p>
                                 
                                             </div>
                                         </div>
@@ -273,9 +276,10 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5">Weds.</p>
+                                                <p class="cardDate">12/9/20</p>
                                 
                                             </div>
                                         </div>
@@ -283,9 +287,10 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5">Thurs.</p>
+                                                <p class="cardDate">12/10/20</p>
                                 
                                             </div>
                                         </div>
@@ -293,9 +298,10 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5">Fri.</p>
+                                                <p class="cardDate">12/11/20</p>
                                     
                                             </div>
                                         </div>
@@ -303,9 +309,10 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <h5 class="card-title">Special title treatment</h5>
-                                                <p class="card-text">With supporting text below as a natural lead-in to
-                                                    additional content.</p>
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-text cardDay mt-5">Sat.</p>
+                                                <p class="cardDate">12/12/20</p>
                                     
                                             </div>
                                         </div>
