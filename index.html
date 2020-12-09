@@ -29,13 +29,13 @@ Desktop Weather Application
 
     <!--Navbar Code-->
     <div class="row navBar">
-        <div class="col-8">
-            <h1 class="header px-3">Weather Thingy</h1>
+        <div class="col-6">
+            <h1 class="header px-4">Weather Thingy</h1>
         </div>
-        <div class="col-4">
+        <div class="col-6">
             <form class="d-flex justify-content-center mt-2 mb-2">
 
-                <div class="input-group me-5">
+                <div class="input-group me-4">
 
                     <button class="input-group-text searchBtn"><i class="fas fa-search fa-2x"></i></button>
 
@@ -43,28 +43,35 @@ Desktop Weather Application
                         placeholder="(City), (State/Country)">
                 </div>
 
-                <button data-target="#favsModal" class="btn favBtn me-3 px-5" type="submit"><i
-                        class="fas fa-star fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;Favorites</button>
+                <button type="button" class="favBtn me-4 px-5" data-bs-toggle="modal" data-bs-target="#favsModal">
+                    <i class="fas fa-star fa-lg "></i>&nbsp;&nbsp;&nbsp;&nbsp;Favorites</button>
+                </button>
             </form>
         </div>
     </div>
 
-    <!-- Modal Code -->
-    <div class="modal fade" id="favsModal" tabindex="-1" role="dialog" aria-labelledby="favsModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="favsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="FavoritesModal"><i class="fas fa-star fa-2x"></i>Favorites</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title modalText" id="FavoritesModal"><i class="fas fa-star fa-xs"></i> &nbsp;Favorites</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    ...
+                <div class="modal-body ">
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary center">Stockton, CA</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary center">Taumatawh...,NZ</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary center">Manteca, US</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Button trigger modal -->
+    
+    
 
     <!--Body Code-->
     <div class="container-fluid">
@@ -77,18 +84,18 @@ Desktop Weather Application
                                 <div class="col-9 mt-2">
                                     <h2 class="px-3 subtitle">Current Weather</h2>
                                 </div>
-                                <div class="col-3 mt-3 px-5">
+                                <div class="col-3 mt-3 px-0">
                                     <a href="#" class="btn btn-primary addbtnFav" id="arFavorites" style="width: 205px; height: 49px">+ Add to Favorites</a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <h3 class="px-3 todayDate mt-3" id="todayDate">Monday, December 7, 2020 1:32:18 PM</h3>
+                                    <h3 class="px-3 todayDate " id="todayDate">Monday, December 7, 2020 1:32:18 PM</h3>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <p class="px-3 cityName mt-3" id="location">Manteca, CA</p>
+                                    <p class="px-3 cityName mt-2" id="location">Manteca, CA</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -107,7 +114,7 @@ Desktop Weather Application
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <p class="px-3 sunSetting" id="todaySS"><i data-feather="sunset" style="width: 40px; height: 40px"class="mb-3"></i>&nbsp; Sunset - 4:45pm</p>
+                                    <p class="px-3 sunSetting" id="todaySS"><i data-feather="sunset" style="width: 40px; height: 40px"class=""></i>&nbsp; Sunset - 4:45pm</p>
                                 </div>
                             </div>
                             <br>
@@ -124,7 +131,7 @@ Desktop Weather Application
                                             <p class="weatherBorders"></p>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
+                                    <div class="row mt-4">
                                         <div class="col-6">
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Wind Speed:</p>
                                         </div>
@@ -135,7 +142,7 @@ Desktop Weather Application
                                             <p class="weatherBorders"></p>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
+                                    <div class="row mt-4">
                                         <div class="col-6">
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Humidity:</p>
                                         </div>
@@ -146,7 +153,7 @@ Desktop Weather Application
                                             <p class="weatherBorders"></p>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
+                                    <div class="row mt-4">
                                         <div class="col-6">
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Pressure: </p>
                                         </div>
@@ -154,7 +161,7 @@ Desktop Weather Application
                                             <p class="noPadding text-end detailWeather">30.17 inches&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
-                                            <p class="weatherBorders mb-5"></p>
+                                            <p class="weatherBorders "></p>
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +177,7 @@ Desktop Weather Application
                                             <p class="weatherBorders "></p>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
+                                    <div class="row mt-4">
                                         <div class="col-6">
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;UV Index: </p>
                                         </div>
@@ -181,7 +188,7 @@ Desktop Weather Application
                                             <p class="weatherBorders"></p>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
+                                    <div class="row mt-4">
                                         <div class="col-6">
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Visibility:</p>
                                         </div>
@@ -192,14 +199,14 @@ Desktop Weather Application
                                             <p class="weatherBorders"></p>
                                         </div>
                                     </div>
-                                    <div class="row mt-5">
+                                    <div class="row mt-4">
                                         <div class="col-6">
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Cloud:</p>
                                         </div>
                                         <div class="col-6">
                                             <p class="noPadding text-end detailWeather">1%&nbsp;&nbsp;</p>
                                         </div>
-                                        <div class="col-12 px-4 mb-5">
+                                        <div class="col-12 px-4 ">
                                             <p class="weatherBorders"></p>
                                         </div>
                                     </div>
@@ -224,27 +231,27 @@ Desktop Weather Application
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 140px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5 mb-5">Morning</p>
+                                                <p class="card-text cardDay mt-4 mb-4">Morning</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="partly-sunny" style="width: 160px; height: 140px"></ion-icon>
+                                                <ion-icon class="weatherIconCloud" name="partly-sunny" style="width: 140px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5 mb-5">Afternoon</p>
+                                                <p class="card-text cardDay mt-4 mb-4">Afternoon</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <ion-icon class="sun" name="sunny" style="width: 160px; height: 140px"></ion-icon>
+                                                <ion-icon class="sun" name="sunny" style="width: 140px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5 mb-5">Evening</p>
+                                                <p class="card-text cardDay mt-4 mb-4">Evening</p>
                                             </div>
                                         </div>
                                     </div>
@@ -264,10 +271,10 @@ Desktop Weather Application
                                     <div class="col-1"></div>
                                     <div class="col-2">
                                         <div class="text-center">
-                                            <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                            <div class="card-body noPadding">
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5">Tues.</p>
+                                                <p class="card-text cardDay mt-3">Tues.</p>
                                                 <p class="cardDate">12/8/20</p>
                                 
                                             </div>
@@ -275,10 +282,10 @@ Desktop Weather Application
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
-                                            <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                            <div class="card-body noPadding">
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5">Weds.</p>
+                                                <p class="card-text cardDay mt-3">Weds.</p>
                                                 <p class="cardDate">12/9/20</p>
                                 
                                             </div>
@@ -286,10 +293,10 @@ Desktop Weather Application
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
-                                            <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                            <div class="card-body noPadding">
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5">Thurs.</p>
+                                                <p class="card-text cardDay mt-3">Thurs.</p>
                                                 <p class="cardDate">12/10/20</p>
                                 
                                             </div>
@@ -297,10 +304,10 @@ Desktop Weather Application
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
-                                            <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                            <div class="card-body noPadding">
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5">Fri.</p>
+                                                <p class="card-text cardDay mt-3">Fri.</p>
                                                 <p class="cardDate">12/11/20</p>
                                     
                                             </div>
@@ -308,11 +315,11 @@ Desktop Weather Application
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
-                                            <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 160px; height: 140px"></ion-icon>
+                                            <div class="card-body noPadding">
+                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-5">Sat.</p>
-                                                <p class="cardDate">12/12/20</p>
+                                                <p class="card-text cardDay mt-3">Sat.</p>
+                                                <p class="cardDate ">12/12/20</p>
                                     
                                             </div>
                                         </div>
