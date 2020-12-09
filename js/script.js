@@ -1,7 +1,7 @@
-let lon = [];
-let lat = [];
+let lon;
+let lat;
 let url_pt1 = "http://api.openweathermap.org/data/2.5/weather?q=";
-let url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat[0] + "&lon" + lon[0] + "&units=imperial"; 
+let url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon" + lon + "&units=imperial"; 
 let city = "stockton, ca, us,"+ "&units=imperial";
 let apikey = "&appid=3bdbeade6189c91354f9f969824f70b6";
 
@@ -12,7 +12,9 @@ citySearch.addEventListener("keypress", function (e) {
     if (e.code == "Enter") {
         city = citySearch.value + "&units=imperial";
         loadToday(url_pt1 + city + apikey);
-        oneCall(url_pt2 + apikey);
+        setTimeout(function () {
+            oneCall(url_pt2 + apikey)
+        }, 1250);
         e.preventDefault();
         
     } 
@@ -28,9 +30,9 @@ function loadToday(url) {
     console.log(data);
     console.log("City: "+ data.name);
     console.log("Current Temp: " + data.main.temp +"°F, "+ data.weather[0].main)
-    lon.push(data.coord.lon);
-    lat.push(data.coord.lat);
-    url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat[0] + "&lon=" + lon[0] + "&units=imperial";
+    lon=data.coord.lon;
+    lat=data.coord.lat;
+    url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
     console.log(url_pt2);
 });
 
@@ -41,7 +43,6 @@ function oneCall(url){
     fetch(url).then(
         oneCallForecast => oneCallForecast.json()
     ).then(oneCallData =>{
-    
         console.log("Morning Temp: " + oneCallData.daily[0].temp.morn + "°F");
         console.log("Afternoon Temp: " + oneCallData.daily[0].temp.day + "°F");
         console.log("Evening Temp: " + oneCallData.daily[0].temp.night + "°F");
@@ -54,6 +55,3 @@ function oneCall(url){
     });
 }
 
-setTimeout(function(){
-    oneCall(url_pt2 + apikey)
-}, 1000);
