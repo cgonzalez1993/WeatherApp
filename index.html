@@ -1,6 +1,6 @@
 <!--
 Carlos Gonzalez
-12/8/2020
+12/9/2020
 Sprint Week 2
 Desktop Weather Application
 -->
@@ -85,7 +85,7 @@ Desktop Weather Application
                                     <h2 class="px-3 subtitle">Current Weather</h2>
                                 </div>
                                 <div class="col-3 mt-3 px-0">
-                                    <a href="#" class="btn btn-primary addbtnFav" id="arFavorites" style="width: 205px; height: 49px">+ Add to Favorites</a>
+                                    <a href="#" class="btn btn-primary addbtnFav" id="addFavorites" style="width: 205px; height: 49px">+ Add to Favorites</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -95,7 +95,7 @@ Desktop Weather Application
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <p class="px-3 cityName mt-2" id="location">Manteca, CA</p>
+                                    <p class="px-3 cityName mt-2" id="location1">Manteca, CA</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -233,7 +233,7 @@ Desktop Weather Application
                                             <div class="card-body">
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 140px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-4 mb-4">Morning</p>
+                                                <p class="card-text cardDay mt-4 mb-4"id="morningTemp">Morning</p>
                                             </div>
                                         </div>
                                     </div>
@@ -241,7 +241,7 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body">
                                                 <ion-icon class="weatherIconCloud" name="partly-sunny" style="width: 140px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
+                                                <p class="card-title cardTemp" id="afternoonTemp">50°F</p>
                                                 <p class="card-text cardDay mt-4 mb-4">Afternoon</p>
                                             </div>
                                         </div>
@@ -251,7 +251,7 @@ Desktop Weather Application
                                             <div class="card-body">
                                                 <ion-icon class="sun" name="sunny" style="width: 140px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-4 mb-4">Evening</p>
+                                                <p class="card-text cardDay mt-4 mb-4"id="eveningTemp">Evening</p>
                                             </div>
                                         </div>
                                     </div>

@@ -5,6 +5,34 @@ let url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&l
 let city = "stockton, ca, us," + "&units=imperial";
 let apikey = "&appid=3bdbeade6189c91354f9f969824f70b6";
 
+let cityArray = [];
+let location1 = document.getElementById("location1");
+let morningTemp = document.getElementById("morningTemp");
+let afternoonTemp = document.getElementById("afterTemp");
+let eveningTemp = document.getElementById("eveningTemp");
+let addFavorites = document.getElementById("addFavroites")
+
+// addFavorites.addEventListener('click',()=>{
+//     saveToLocalStorage(location1.value);
+//     location.innerText = location1.value;
+// });
+
+// function saveToLocalStorage(cityToSave){
+//     cityArray.push(cityToSave);
+//     localStorage.setItem("cities", JSON.stringify(cityArray));
+// }
+
+// function onLoad(){
+//     let localStorageCity = JSON.parse(localStorage.getItem("cities"));
+//     if(localStorageCity != null){
+//         location1.innerText = localStorageCity;
+//     }
+//     else{
+//         location1.innerText = "...";
+//     }
+// }
+// onLoad();
+
 let citySearch = document.getElementById("citySearch");
 let executeSearch = document.getElementById("executeSearch");
 
@@ -15,6 +43,7 @@ citySearch.addEventListener("keypress", function (e) {
         setTimeout(function () {
             oneCall(url_pt2 + apikey)
         }, 1250);
+        
         if (citySearch.value == "" || citySearch.value == " ") {
             alert("Please enter the name of a city.");
         }
@@ -22,6 +51,7 @@ citySearch.addEventListener("keypress", function (e) {
             alert("You don't deserve to know.");
         }
         e.preventDefault();
+        
     }
 });
 
@@ -40,7 +70,7 @@ executeSearch.addEventListener("click", function (e) {
     e.preventDefault();
 });
 
-//Pulling Hourly Forecast
+//Pulling current weather API
 function loadToday(url) {
     fetch(url).then(
         todayForecast => todayForecast.json()
@@ -52,15 +82,20 @@ function loadToday(url) {
         lat = data.coord.lat;
         url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
         console.log(url_pt2);
+        location1.innerHTML = data.name+", "+data.sys.country;
+        
     });
 
 }
 
-//Pulling one call API
+//Pulling onecall API
 function oneCall(url) {
     fetch(url).then(
         oneCallForecast => oneCallForecast.json()
     ).then(oneCallData => {
+        morningTemp.textContent = oneCallData.daily[0].temp.morn + "°F";
+        afternoonTemp.textContent = oneCallData.daily[0].temp.day + "°F";
+        eveningTemp.textContent = oneCallData.daily[0].temp.night + "°F";
         console.log("Morning Temp: " + oneCallData.daily[0].temp.morn + "°F");
         console.log("Afternoon Temp: " + oneCallData.daily[0].temp.day + "°F");
         console.log("Evening Temp: " + oneCallData.daily[0].temp.night + "°F");
