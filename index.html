@@ -100,10 +100,11 @@ Desktop Weather Application
                             </div>
                             <div class="row">
                                 <div class="col-2">
-                                    <ion-icon name="sunny" style="width: 200px; height: 200px" class="sun mt-4"></ion-icon>
+                                    <div class="weather-icon"><img src="icons/unknown.png"></div>
+                                    <i id="currentWeatherIcon"><ion-icon name="sunny" style="width: 200px; height: 200px" class="sun mt-4"></ion-icon></i>
                                 </div>
                                 <div class="col-10">
-                                    <p class="px-3 noPadding tempNow" id="todayTemp">&nbsp;55°F</p>
+                                    <p class="px-3 noPadding tempNow" id="currentTemp">&nbsp;55°F</p>
 
                                 </div>
                             </div>
@@ -232,8 +233,8 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body">
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 140px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-4 mb-4"id="morningTemp">Morning</p>
+                                                <p class="card-title cardTemp"id="morningTemp">50°F</p>
+                                                <p class="card-text cardDay mt-4 mb-4">Morning</p>
                                             </div>
                                         </div>
                                     </div>
@@ -250,8 +251,8 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body">
                                                 <ion-icon class="sun" name="sunny" style="width: 140px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-4 mb-4"id="eveningTemp">Evening</p>
+                                                <p class="card-title cardTemp" id="eveningTemp">50°F</p>
+                                                <p class="card-text cardDay mt-4 mb-4">Evening</p>
                                             </div>
                                         </div>
                                     </div>
@@ -273,8 +274,8 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body noPadding">
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-3">Tues.</p>
+                                                <p class="card-title cardTemp" id="day1Temp">50°F</p>
+                                                <p class="card-text cardDay mt-3" id="day1">Tues.</p>
                                                 <p class="cardDate">12/8/20</p>
                                 
                                             </div>
@@ -284,8 +285,8 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body noPadding">
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-3">Weds.</p>
+                                                <p class="card-title cardTemp"id="day2Temp">50°F</p>
+                                                <p class="card-text cardDay mt-3"id="day2">Weds.</p>
                                                 <p class="cardDate">12/9/20</p>
                                 
                                             </div>
@@ -295,8 +296,8 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body noPadding">
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-3">Thurs.</p>
+                                                <p class="card-title cardTemp" id="day3Temp">50°F</p>
+                                                <p class="card-text cardDay mt-3" id="day3">Thurs.</p>
                                                 <p class="cardDate">12/10/20</p>
                                 
                                             </div>
@@ -306,8 +307,8 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body noPadding">
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-3">Fri.</p>
+                                                <p class="card-title cardTemp" id="day4Temp">50°F</p>
+                                                <p class="card-text cardDay mt-3" id="day4">Fri.</p>
                                                 <p class="cardDate">12/11/20</p>
                                     
                                             </div>
@@ -317,8 +318,8 @@ Desktop Weather Application
                                         <div class="text-center">
                                             <div class="card-body noPadding">
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
-                                                <p class="card-title cardTemp">50°F</p>
-                                                <p class="card-text cardDay mt-3">Sat.</p>
+                                                <p class="card-title cardTemp" id="day5Temp">50°F</p>
+                                                <p class="card-text cardDay mt-3" id="day5">Sat.</p>
                                                 <p class="cardDate ">12/12/20</p>
                                     
                                             </div>

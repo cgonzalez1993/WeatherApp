@@ -7,8 +7,12 @@ let apikey = "&appid=3bdbeade6189c91354f9f969824f70b6";
 
 let cityArray = [];
 let location1 = document.getElementById("location1");
+let currentTemp = document.getElementById("currentTemp");
+let locationIcon = document.querySelector('.weather-icon');
+
+
 let morningTemp = document.getElementById("morningTemp");
-let afternoonTemp = document.getElementById("afterTemp");
+let afternoonTemp = document.getElementById("afternoonTemp");
 let eveningTemp = document.getElementById("eveningTemp");
 let addFavorites = document.getElementById("addFavroites")
 
@@ -75,6 +79,7 @@ function loadToday(url) {
     fetch(url).then(
         todayForecast => todayForecast.json()
     ).then(data => {
+        const { icon } = data.weather[0];
         console.log(data);
         console.log("City: " + data.name);
         console.log("Current Temp: " + data.main.temp + "°F, " + data.weather[0].main)
@@ -83,19 +88,19 @@ function loadToday(url) {
         url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
         console.log(url_pt2);
         location1.innerHTML = data.name+", "+data.sys.country;
-        
-    });
+        currentTemp.innerHTML = data.main.temp + "°F"
+        locationIcon.innerHTML = data.weather[0];
+         
+        });
 
-}
+        }
 
-//Pulling onecall API
+        //Pulling onecall API
 function oneCall(url) {
     fetch(url).then(
         oneCallForecast => oneCallForecast.json()
     ).then(oneCallData => {
-        morningTemp.textContent = oneCallData.daily[0].temp.morn + "°F";
-        afternoonTemp.textContent = oneCallData.daily[0].temp.day + "°F";
-        eveningTemp.textContent = oneCallData.daily[0].temp.night + "°F";
+       
         console.log("Morning Temp: " + oneCallData.daily[0].temp.morn + "°F");
         console.log("Afternoon Temp: " + oneCallData.daily[0].temp.day + "°F");
         console.log("Evening Temp: " + oneCallData.daily[0].temp.night + "°F");
@@ -105,6 +110,9 @@ function oneCall(url) {
         console.log("Sunday Temp: " + oneCallData.daily[4].temp.day + "°F");
         console.log("Monday Temp: " + oneCallData.daily[5].temp.day + "°F");
         console.log(oneCallData);
+        morningTemp.innerHTML = oneCallData.daily[0].temp.morn + "°F";
+        afternoonTemp.innerHTML = oneCallData.daily[0].temp.day + "°F";
+        eveningTemp.textContent = oneCallData.daily[0].temp.night + "°F";
     });
 }
 
