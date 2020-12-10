@@ -1,6 +1,6 @@
 <!--
 Carlos Gonzalez
-12/9/2020
+12/10/2020
 Sprint Week 2
 Desktop Weather Application
 -->
@@ -54,7 +54,7 @@ Desktop Weather Application
 
     <!-- Modal -->
     <div class="modal fade" id="favsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title modalText" id="FavoritesModal"><i class="fas fa-star fa-xs"></i> &nbsp;Favorites</h5>
@@ -85,7 +85,7 @@ Desktop Weather Application
                                     <h2 class="px-3 subtitle">Current Weather</h2>
                                 </div>
                                 <div class="col-3 mt-3 px-0">
-                                    <a href="#" class="btn btn-primary addbtnFav" id="addFavorites" style="width: 205px; height: 49px">+ Add to Favorites</a>
+                                    <a class="btn btn-primary addbtnFav" id="addFavorites" style="width: 205px; height: 49px">+ Add to Favorites</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -101,7 +101,7 @@ Desktop Weather Application
                             <div class="row">
                                 <div class="col-2">
                                     <div class="weather-icon"><img src="icons/unknown.png"></div>
-                                    <i id="currentWeatherIcon"><ion-icon name="sunny" style="width: 200px; height: 200px" class="sun mt-4"></ion-icon></i>
+                                    <!-- <i id="currentWeatherIcon"><ion-icon name="sunny" style="width: 200px; height: 200px" class="sun mt-4"></ion-icon></i> -->
                                 </div>
                                 <div class="col-10">
                                     <p class="px-3 noPadding tempNow" id="currentTemp">&nbsp;55°F</p>
@@ -336,17 +336,9 @@ Desktop Weather Application
     </div>
 
 
-
-
-
-
-
-
-
 <script>
     feather.replace()
 </script>
-
 
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -11,6 +11,7 @@ let location1 = document.getElementById("location1");
 let currentTemp = document.getElementById("currentTemp");
 let locationIcon = document.querySelector('.weather-icon');
 
+let todayDate = document.getElementById("todayDate");
 let todayFeelsLike = document.getElementById("todayFeelsLike");
 let todayWindSpeed = document.getElementById("todayWindSpeed");
 let todayHumidity = document.getElementById("todayHumidity");
@@ -19,6 +20,8 @@ let todayAQI = document.getElementById("todayAQI");
 let todayUVindex = document.getElementById("todayUVindex");
 let todayVisibility = document.getElementById("todayVisibility");
 let todayCloud = document.getElementById("todayCloud");
+let todaySR = document.getElementById("todaySR");
+let todaySS = document.getElementById("todaySS");
 
 let day1 = document.getElementById("day1");
 let day2 = document.getElementById("day2");
@@ -76,8 +79,8 @@ citySearch.addEventListener("keypress", function (e) {
 
         setTimeout(function () {
             airPollution(url_pt3 + apikey)
-        }, 2000);
-        
+        }, 1250);
+
         if (citySearch.value == "" || citySearch.value == " ") {
             alert("Please enter the name of a city.");
         }
@@ -85,15 +88,14 @@ citySearch.addEventListener("keypress", function (e) {
             alert("You don't deserve to know.");
         }
         e.preventDefault();
-        
     }
 });
 
 executeSearch.addEventListener("click", function (e) {
-    if(citySearch.value == "" || citySearch.value == " "){
+    if (citySearch.value == "" || citySearch.value == " ") {
         alert("Please enter the name of a city.");
     }
-    else if(citySearch.value == "the name of a city"){
+    else if (citySearch.value == "the name of a city") {
         alert("You don't deserve to know.")
     }
     city = citySearch.value + "&units=imperial";
@@ -104,65 +106,539 @@ executeSearch.addEventListener("click", function (e) {
         oneCall(url_pt2 + apikey)
     }, 1250);
 
-    
     setTimeout(function () {
         airPollution(url_pt3 + apikey)
-    }, 2000);
-    
+    }, 1250);
 
     e.preventDefault();
 });
 
-//Pulling current weather API
+//Pulling Current Weather API
 function loadToday(url) {
     fetch(url).then(
         todayForecast => todayForecast.json()
     ).then(data => {
         const { icon } = data.weather[0];
-        console.log(data);
         console.log("City: " + data.name);
         console.log("Current Temp: " + data.main.temp + "°F, " + data.weather[0].main)
+        console.log(data);
         lon = data.coord.lon;
         lat = data.coord.lat;
         url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
         url_pt3 = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon;
 
-        location1.innerHTML = data.name+", "+data.sys.country;
-        currentTemp.innerHTML = data.main.temp + "°F"
+        location1.innerHTML = data.name + ", " + data.sys.country;
+        currentTemp.innerHTML = Math.trunc(data.main.temp) + "°F"
         locationIcon.innerHTML = data.weather[0];
-        todayFeelsLike.innerHTML = data.main.feels_like + "°F&nbsp;&nbsp;";
-        todayWindSpeed.innerHTML = data.wind.speed + "mph&nbsp;&nbsp;";
+        todayFeelsLike.innerHTML = Math.trunc(data.main.feels_like) + "°F&nbsp;&nbsp;";
+        todayWindSpeed.innerHTML = (data.wind.speed) + "mph&nbsp;&nbsp;";
         todayHumidity.innerHTML = data.main.humidity + "%&nbsp;&nbsp;";
         todayPressure.innerHTML = data.main.pressure + " hPa&nbsp;&nbsp;";
-        todayVisibility.innerHTML = data.visibility + "mi&nbsp;&nbsp;" 
+        todayVisibility.innerHTML = Math.trunc(data.visibility / 1609.34) + " mi&nbsp;&nbsp;"
         todayCloud.innerHTML = data.clouds.all + "%&nbsp;&nbsp;";
+
+        myDate = new Date(data.dt * 1000);
+        mySR = new Date(data.sys.sunrise * 1000);
+        mySS = new Date(data.sys.sunset * 1000);
+
+        let month;
+        switch (myDate.getMonth()) {
+            case 0:
+                month = "January";
+                break;
+            case 1:
+                month = "February";
+                break;
+            case 2:
+                month = "March";
+                break;
+            case 3:
+                month = "April";
+                break;
+            case 4:
+                month = "May";
+                break;
+            case 5:
+                month = "June";
+                break;
+            case 6:
+                month = "July";
+                break;
+            case 7:
+                month = "August";
+                break;
+            case 8:
+                month = "September";
+                break;
+            case 9:
+                month = "October";
+                break;
+            case 10:
+                month = "November";
+                break;
+            default:
+                month = "December";
+                break;
+        }
+
+        let currentDay;
+        switch (myDate.getDay()) {
+            case 0:
+                currentDay = "Sunday";
+                break;
+            case 1:
+                currentDay = "Monday";
+                break;
+            case 2:
+                currentDay = "Tuesday";
+                break;
+            case 3:
+                currentDay = "Wednesday";
+                break;
+            case 4:
+                currentDay = "Thursday";
+                break;
+            case 5:
+                currentDay = "Friday";
+                break;
+            default:
+                currentDay = "Saturday";
+                break;
+        }
+
+        let currentHour;
+        switch (myDate.getHours()) {
+            case 0:
+                currentHour = "12";
+                break;
+            case 1:
+                currentHour = "1";
+                break;
+            case 2:
+                currentHour = "2";
+                break;
+            case 3:
+                currentHour = "3";
+                break;
+            case 4:
+                currentHour = "4";
+                break;
+            case 5:
+                currentHour = "5";
+                break;
+            case 6:
+                currentHour = "6";
+                break;
+            case 7:
+                currentHour = "7";
+                break;
+            case 8:
+                currentHour = "8";
+                break;
+            case 9:
+                currentHour = "9";
+                break;
+            case 10:
+                currentHour = "10";
+                break;
+            case 11:
+                currentHour = "11";
+                break;
+            case 12:
+                currentHour = "12";
+                break;
+            case 13:
+                currentHour = "1";
+                break;
+            case 14:
+                currentHour = "2";
+                break;
+            case 15:
+                currentHour = "3";
+                break;
+            case 16:
+                currentHour = "4";
+                break;
+            case 17:
+                currentHour = "5";
+                break;
+            case 18:
+                currentHour = "6";
+                break;
+            case 19:
+                currentHour = "7";
+                break;
+            case 20:
+                currentHour = "8";
+                break;
+            case 21:
+                currentHour = "9";
+                break;
+            case 22:
+                currentHour = "10";
+                break;
+            case 23:
+                currentHour = "11";
+                break;
+            default:
+                currentHour = "12";
+                break;
+        }
+
+        let currentHour1;
+        switch (mySR.getHours()) {
+            case 0:
+                currentHour1 = "12";
+                break;
+            case 1:
+                currentHour1 = "1";
+                break;
+            case 2:
+                currentHour1 = "2";
+                break;
+            case 3:
+                currentHour1 = "3";
+                break;
+            case 4:
+                currentHour1 = "4";
+                break;
+            case 5:
+                currentHour1 = "5";
+                break;
+            case 6:
+                currentHour1 = "6";
+                break;
+            case 7:
+                currentHour1 = "7";
+                break;
+            case 8:
+                currentHour1 = "8";
+                break;
+            case 9:
+                currentHour1 = "9";
+                break;
+            case 10:
+                currentHour1 = "10";
+                break;
+            case 11:
+                currentHour1 = "11";
+                break;
+            case 12:
+                currentHour1 = "12";
+                break;
+            case 13:
+                currentHour1 = "1";
+                break;
+            case 14:
+                currentHour1 = "2";
+                break;
+            case 15:
+                currentHour1 = "3";
+                break;
+            case 16:
+                currentHour1 = "4";
+                break;
+            case 17:
+                currentHour1 = "5";
+                break;
+            case 18:
+                currentHour1 = "6";
+                break;
+            case 19:
+                currentHour1 = "7";
+                break;
+            case 20:
+                currentHour1 = "8";
+                break;
+            case 21:
+                currentHour1 = "9";
+                break;
+            case 22:
+                currentHour1 = "10";
+                break;
+            case 23:
+                currentHour1 = "11";
+                break;
+            default:
+                currentHour1 = "12";
+                break;
+        }
+
+        let currentHour2;
+        switch (mySS.getHours()) {
+            case 0:
+                currentHour2 = "12";
+                break;
+            case 1:
+                currentHour2 = "1";
+                break;
+            case 2:
+                currentHour2 = "2";
+                break;
+            case 3:
+                currentHour2 = "3";
+                break;
+            case 4:
+                currentHour2 = "4";
+                break;
+            case 5:
+                currentHour2 = "5";
+                break;
+            case 6:
+                currentHour2 = "6";
+                break;
+            case 7:
+                currentHour2 = "7";
+                break;
+            case 8:
+                currentHour2 = "8";
+                break;
+            case 9:
+                currentHour2 = "9";
+                break;
+            case 10:
+                currentHour2 = "10";
+                break;
+            case 11:
+                currentHour2 = "11";
+                break;
+            case 12:
+                currentHour2 = "12";
+                break;
+            case 13:
+                currentHour2 = "1";
+                break;
+            case 14:
+                currentHour2 = "2";
+                break;
+            case 15:
+                currentHour2 = "3";
+                break;
+            case 16:
+                currentHour2 = "4";
+                break;
+            case 17:
+                currentHour2 = "5";
+                break;
+            case 18:
+                currentHour2 = "6";
+                break;
+            case 19:
+                currentHour2 = "7";
+                break;
+            case 20:
+                currentHour2 = "8";
+                break;
+            case 21:
+                currentHour2 = "9";
+                break;
+            case 22:
+                currentHour2 = "10";
+                break;
+            case 23:
+                currentHour2 = "11";
+                break;
+            default:
+                currentHour2 = "12";
+                break;
+        }
+        console.log(mySR);
+        todayDate.innerText = currentDay + ", " + month + " " + myDate.getDate() + ", " + myDate.getFullYear() + " " + currentHour + ":" + myDate.getMinutes() + ":" + myDate.getSeconds();
+
+        todaySR.innerText = "Sunrise - " + currentHour1 + ":" + mySR.getMinutes() + `${mySR.getHours > 12 ? "pm" : "am"}`;
+
+        todaySS.innerText = "Sunset - " + currentHour2 + ":" + mySS.getMinutes() + `${mySS.getHours > 12 ? "am" : "pm"}`;
     });
 
-        }
+}
 
 //Pulling One Call API
 function oneCall(url) {
     fetch(url).then(
         oneCallForecast => oneCallForecast.json()
     ).then(oneCallData => {
-        console.log("Morning Temp: " + oneCallData.daily[0].temp.morn + "°F");
-        console.log("Afternoon Temp: " + oneCallData.daily[0].temp.day + "°F");
-        console.log("Evening Temp: " + oneCallData.daily[0].temp.night + "°F");
-        console.log("Thursday Temp: " + oneCallData.daily[1].temp.day + "°F");
-        console.log("Friday Temp: " + oneCallData.daily[2].temp.day + "°F");
-        console.log("Saturday Temp: " + oneCallData.daily[3].temp.day + "°F");
-        console.log("Sunday Temp: " + oneCallData.daily[4].temp.day + "°F");
-        console.log("Monday Temp: " + oneCallData.daily[5].temp.day + "°F");
+        // console.log("Morning Temp: " + Math.trunc(oneCallData.daily[0].temp.morn) + "°F");
+        // console.log("Afternoon Temp: " + oneCallData.daily[0].temp.day + "°F");
+        // console.log("Evening Temp: " + oneCallData.daily[0].temp.night + "°F");
+        // console.log("Thursday Temp: " + oneCallData.daily[1].temp.day + "°F");
+        // console.log("Friday Temp: " + oneCallData.daily[2].temp.day + "°F");
+        // console.log("Saturday Temp: " + oneCallData.daily[3].temp.day + "°F");
+        // console.log("Sunday Temp: " + oneCallData.daily[4].temp.day + "°F");
+        // console.log("Monday Temp: " + oneCallData.daily[5].temp.day + "°F");
         console.log(oneCallData);
-        morningTemp.innerHTML = oneCallData.daily[0].temp.morn + "°F";
-        afternoonTemp.innerHTML = oneCallData.daily[0].temp.day + "°F";
-        eveningTemp.textContent = oneCallData.daily[0].temp.night + "°F";
+        morningTemp.innerHTML = Math.trunc(oneCallData.daily[0].temp.morn) + "°F";
+        afternoonTemp.innerHTML = Math.trunc(oneCallData.daily[0].temp.day) + "°F";
+        eveningTemp.textContent = Math.trunc(oneCallData.daily[0].temp.night) + "°F";
         todayUVindex.innerHTML = oneCallData.current.uvi + "&nbsp;&nbsp;";
-        day1Temp.innerHTML = oneCallData.daily[1].temp.day + "°F";
-        day2Temp.innerHTML = oneCallData.daily[2].temp.day + "°F";
-        day3Temp.innerHTML = oneCallData.daily[3].temp.day + "°F";
-        day4Temp.innerHTML = oneCallData.daily[4].temp.day + "°F";
-        day5Temp.innerHTML = oneCallData.daily[5].temp.day + "°F";
+        day1Temp.innerHTML = Math.trunc(oneCallData.daily[1].temp.day) + "°F";
+        day2Temp.innerHTML = Math.trunc(oneCallData.daily[2].temp.day) + "°F";
+        day3Temp.innerHTML = Math.trunc(oneCallData.daily[3].temp.day) + "°F";
+        day4Temp.innerHTML = Math.trunc(oneCallData.daily[4].temp.day) + "°F";
+        day5Temp.innerHTML = Math.trunc(oneCallData.daily[5].temp.day) + "°F";
+
+        myDate1 = new Date(oneCallData.daily[1].dt * 1000);
+        myDate2 = new Date(oneCallData.daily[2].dt * 1000);
+        myDate3 = new Date(oneCallData.daily[3].dt * 1000);
+        myDate4 = new Date(oneCallData.daily[4].dt * 1000);
+        myDate5 = new Date(oneCallData.daily[5].dt * 1000);
+
+        myDay1 = new Date(oneCallData.daily[1].dt * 1000);
+        myDay2 = new Date(oneCallData.daily[2].dt * 1000);
+        myDay3 = new Date(oneCallData.daily[3].dt * 1000);
+        myDay4 = new Date(oneCallData.daily[4].dt * 1000);
+        myDay5 = new Date(oneCallData.daily[5].dt * 1000);
+
+        let currentDay1;
+        switch (myDay1.getDay()) {
+            case 0:
+                currentDay1 = "Sun.";
+                break;
+            case 1:
+                currentDay1 = "Mon.";
+                break;
+            case 2:
+                currentDay1 = "Tues.";
+                break;
+            case 3:
+                currentDay1 = "Weds.";
+                break;
+            case 4:
+                currentDay1 = "Thurs.";
+                break;
+            case 5:
+                currentDay1 = "Fri.";
+                break;
+            case 6:
+                currentDay1 = "Sat.";
+                break;
+            default:
+                currentDay1 = "Sun.";
+                break;
+        }
+
+        let currentDay2;
+        switch (myDay2.getDay()) {
+            case 0:
+                currentDay2 = "Sun.";
+                break;
+            case 1:
+                currentDay2 = "Mon.";
+                break;
+            case 2:
+                currentDay2 = "Tues.";
+                break;
+            case 3:
+                currentDay2 = "Weds.";
+                break;
+            case 4:
+                currentDay2 = "Thurs.";
+                break;
+            case 5:
+                currentDay2 = "Fri.";
+                break;
+            case 6:
+                currentDay2 = "Sat.";
+                break;
+            default:
+                currentDay2 = "Sun.";
+                break;
+        }
+
+        let currentDay3;
+        switch (myDay3.getDay()) {
+            case 0:
+                currentDay3 = "Sun.";
+                break;
+            case 1:
+                currentDay3 = "Mon.";
+                break;
+            case 2:
+                currentDay3 = "Tues.";
+                break;
+            case 3:
+                currentDay3 = "Weds.";
+                break;
+            case 4:
+                currentDay3 = "Thurs.";
+                break;
+            case 5:
+                currentDay3 = "Fri.";
+                break;
+            case 6:
+                currentDay3 = "Sat.";
+                break;
+            default:
+                currentDay3 = "Sun.";
+                break;
+        }
+
+        let currentDay4;
+        switch (myDay4.getDay()) {
+            case 0:
+                currentDay4 = "Sun.";
+                break;
+            case 1:
+                currentDay4 = "Mon.";
+                break;
+            case 2:
+                currentDay4 = "Tues.";
+                break;
+            case 3:
+                currentDay4 = "Weds.";
+                break;
+            case 4:
+                currentDay4 = "Thurs.";
+                break;
+            case 5:
+                currentDay4 = "Fri.";
+                break;
+            case 6:
+                currentDay4 = "Sat.";
+                break;
+            default:
+                currentDay4 = "Sun.";
+                break;
+        }
+
+        let currentDay5;
+        switch (myDay5.getDay()) {
+            case 0:
+                currentDay5 = "Sun.";
+                break;
+            case 1:
+                currentDay5 = "Mon.";
+                break;
+            case 2:
+                currentDay5 = "Tues.";
+                break;
+            case 3:
+                currentDay5 = "Weds.";
+                break;
+            case 4:
+                currentDay5 = "Thurs.";
+                break;
+            case 5:
+                currentDay5 = "Fri.";
+                break;
+            case 6:
+                currentDay5 = "Sat.";
+                break;
+            default:
+                currentDay5 = "Sun.";
+                break;
+        }
+
+        date1.innerText = (myDate1.getMonth() + 1) + "/" + myDate1.getDate() + "/" + myDate1.getFullYear();
+        date2.innerText = (myDate2.getMonth() + 1) + "/" + myDate2.getDate() + "/" + myDate2.getFullYear();
+        date3.innerText = (myDate3.getMonth() + 1) + "/" + myDate3.getDate() + "/" + myDate3.getFullYear();
+        date4.innerText = (myDate4.getMonth() + 1) + "/" + myDate4.getDate() + "/" + myDate4.getFullYear();
+        date5.innerText = (myDate5.getMonth() + 1) + "/" + myDate5.getDate() + "/" + myDate5.getFullYear();
+
+        day1.innerText = currentDay1;
+        day2.innerText = currentDay2;
+        day3.innerText = currentDay3;
+        day4.innerText = currentDay4;
+        day5.innerText = currentDay5;
     });
 }
 
@@ -170,10 +646,10 @@ function oneCall(url) {
 function airPollution(url) {
     fetch(url).then(
         currentAQI => currentAQI.json()
-    ).then(aqiData =>{
+    ).then(aqiData => {
         console.log(aqiData);
-        console.log("AQI: "+ aqiData.list[0].main.aqi);
-        if (aqiData.list[0].main.aqi == 1){
+        // console.log("AQI: "+ aqiData.list[0].main.aqi);
+        if (aqiData.list[0].main.aqi == 1) {
             todayAQI.className = "aqi noPadding text-end detailWeather";
             todayAQI.innerText = "Good\u00A0\u00A0";
         }
