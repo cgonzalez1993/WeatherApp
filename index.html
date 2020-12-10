@@ -126,7 +126,7 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Feels like: </p>
                                         </div>
                                         <div class="col-6 ">
-                                            <p class="text-end noPadding detailWeather">58°F&nbsp;&nbsp;</p>
+                                            <p class="text-end noPadding detailWeather" id="todayFeelsLike">58°F&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -137,7 +137,7 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Wind Speed:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather">11mph&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayWindSpeed">11mph&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -145,10 +145,10 @@ Desktop Weather Application
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-6">
-                                            <p class="noPadding detailWeather">&nbsp;&nbsp;Humidity:</p>
+                                            <p class="noPadding detailWeather" >&nbsp;&nbsp;Humidity:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather">53%&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayHumidity">53%&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -159,7 +159,7 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Pressure: </p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather">30.17 inches&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayPressure">30.17 inches&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders "></p>
@@ -172,7 +172,7 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;AQI: </p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather aqi">Good&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather aqi" id="todayAQI">Good&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders "></p>
@@ -183,7 +183,7 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;UV Index: </p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather">0.47&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather"id="todayUVindex">0.47&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -194,7 +194,7 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Visibility:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather">10mi&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather"id="todayVisibility">10mi&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -205,7 +205,7 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Cloud:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather">1%&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather"id="todayCloud">1%&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4 ">
                                             <p class="weatherBorders"></p>
@@ -276,7 +276,7 @@ Desktop Weather Application
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp" id="day1Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day1">Tues.</p>
-                                                <p class="cardDate">12/8/20</p>
+                                                <p class="cardDate" id="date1">12/8/20</p>
                                 
                                             </div>
                                         </div>
@@ -287,7 +287,7 @@ Desktop Weather Application
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp"id="day2Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3"id="day2">Weds.</p>
-                                                <p class="cardDate">12/9/20</p>
+                                                <p class="cardDate" id="date2">12/9/20</p>
                                 
                                             </div>
                                         </div>
@@ -298,7 +298,7 @@ Desktop Weather Application
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp" id="day3Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day3">Thurs.</p>
-                                                <p class="cardDate">12/10/20</p>
+                                                <p class="cardDate" id="date3">12/10/20</p>
                                 
                                             </div>
                                         </div>
@@ -309,7 +309,7 @@ Desktop Weather Application
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp" id="day4Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day4">Fri.</p>
-                                                <p class="cardDate">12/11/20</p>
+                                                <p class="cardDate" id="date4">12/11/20</p>
                                     
                                             </div>
                                         </div>
@@ -320,7 +320,7 @@ Desktop Weather Application
                                                 <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
                                                 <p class="card-title cardTemp" id="day5Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day5">Sat.</p>
-                                                <p class="cardDate ">12/12/20</p>
+                                                <p class="cardDate" id="date5">12/12/20</p>
                                     
                                             </div>
                                         </div>
