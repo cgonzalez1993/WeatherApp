@@ -110,9 +110,6 @@ button:hover {
     font-weight: normal;
 }
 
-.sun {
-    color: #FFB061;
-}
 
 .end {
     display: flex;
@@ -146,9 +143,7 @@ button:hover {
     font-weight: normal;
 }
 
-.weatherIconCloud {
-    color: #B4B4B4;
-}
+
 
 .center {
     display: flex;

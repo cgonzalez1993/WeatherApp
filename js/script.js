@@ -3,13 +3,13 @@ let lat;
 let url_pt1 = "http://api.openweathermap.org/data/2.5/weather?q=";
 let url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
 let url_pt3 = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon;
-let city = "stockton, ca, us," + "&units=imperial";
+let city = "manteca, ca, us," + "&units=imperial";
 let apikey = "&appid=3bdbeade6189c91354f9f969824f70b6";
 
 let cityArray = [];
 let location1 = document.getElementById("location1");
 let currentTemp = document.getElementById("currentTemp");
-let locationIcon = document.querySelector('.weather-icon');
+
 
 let todayDate = document.getElementById("todayDate");
 let todayFeelsLike = document.getElementById("todayFeelsLike");
@@ -68,6 +68,16 @@ let addFavorites = document.getElementById("addFavroites")
 let citySearch = document.getElementById("citySearch");
 let executeSearch = document.getElementById("executeSearch");
 
+loadToday(url_pt1 + city + apikey);
+
+setTimeout(function () {
+    oneCall(url_pt2 + apikey)
+}, 1250);
+
+setTimeout(function () {
+    airPollution(url_pt3 + apikey)
+}, 1250);
+
 citySearch.addEventListener("keypress", function (e) {
     if (e.code == "Enter") {
         city = citySearch.value + "&units=imperial";
@@ -118,7 +128,6 @@ function loadToday(url) {
     fetch(url).then(
         todayForecast => todayForecast.json()
     ).then(data => {
-        const { icon } = data.weather[0];
         console.log("City: " + data.name);
         console.log("Current Temp: " + data.main.temp + "°F, " + data.weather[0].main)
         console.log(data);
@@ -127,9 +136,11 @@ function loadToday(url) {
         url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
         url_pt3 = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon;
 
+
+
         location1.innerHTML = data.name + ", " + data.sys.country;
         currentTemp.innerHTML = Math.trunc(data.main.temp) + "°F"
-        locationIcon.innerHTML = data.weather[0];
+
         todayFeelsLike.innerHTML = Math.trunc(data.main.feels_like) + "°F&nbsp;&nbsp;";
         todayWindSpeed.innerHTML = (data.wind.speed) + "mph&nbsp;&nbsp;";
         todayHumidity.innerHTML = data.main.humidity + "%&nbsp;&nbsp;";
@@ -140,6 +151,64 @@ function loadToday(url) {
         myDate = new Date(data.dt * 1000);
         mySR = new Date(data.sys.sunrise * 1000);
         mySS = new Date(data.sys.sunset * 1000);
+
+        if (data.weather[0].icon == "01d") {
+            document.getElementById("weather-icon").src = "icons/01d.png";
+        }
+        else if (data.weather[0].icon == "01n") {
+            document.getElementById("weather-icon").src = "icons/01n.png";
+        }
+        else if (data.weather[0].icon == "02d") {
+            document.getElementById("weather-icon").src = "icons/02d.png";
+        }
+        else if (data.weather[0].icon == "02n") {
+            document.getElementById("weather-icon").src = "icons/02n.png";
+        }
+        else if (data.weather[0].icon == "03d") {
+            document.getElementById("weather-icon").src = "icons/03d.png";
+        }
+        else if (data.weather[0].icon == "03n") {
+            document.getElementById("weather-icon").src = "icons/03n.png";
+        }
+        else if (data.weather[0].icon == "04d") {
+            document.getElementById("weather-icon").src = "icons/04d.png";
+        }
+        else if (data.weather[0].icon == "04n") {
+            document.getElementById("weather-icon").src = "icons/04n.png";
+        }
+        else if (data.weather[0].icon == "09d") {
+            document.getElementById("weather-icon").src = "icons/09d.png";
+        }
+        else if (data.weather[0].icon == "09n") {
+            document.getElementById("weather-icon").src = "icons/09n.png";
+        }
+        else if (data.weather[0].icon == "10d") {
+            document.getElementById("weather-icon").src = "icons/10d.png";
+        }
+        else if (data.weather[0].icon == "10n") {
+            document.getElementById("weather-icon").src = "icons/10n.png";
+        }
+        else if (data.weather[0].icon == "11d") {
+            document.getElementById("weather-icon").src = "icons/11d.png";
+        }
+        else if (data.weather[0].icon == "11n") {
+            document.getElementById("weather-icon").src = "icons/11n.png";
+        }
+        else if (data.weather[0].icon == "13d") {
+            document.getElementById("weather-icon").src = "icons/13d.png";
+        }
+        else if (data.weather[0].icon == "13n") {
+            document.getElementById("weather-icon").src = "icons/13n.png";
+        }
+        else if (data.weather[0].icon == "50d") {
+            document.getElementById("weather-icon").src = "icons/50d.png";
+        }
+        else if (data.weather[0].icon == "50n") {
+            document.getElementById("weather-icon").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon").src = "icons/unknown.png";
+
 
         let month;
         switch (myDate.getMonth()) {
@@ -442,12 +511,11 @@ function loadToday(url) {
                 currentHour2 = "12";
                 break;
         }
-        console.log(mySR);
         todayDate.innerText = currentDay + ", " + month + " " + myDate.getDate() + ", " + myDate.getFullYear() + " " + currentHour + ":" + myDate.getMinutes() + ":" + myDate.getSeconds();
 
-        todaySR.innerText = "Sunrise - " + currentHour1 + ":" + mySR.getMinutes() + `${mySR.getHours > 12 ? "pm" : "am"}`;
+        // todaySR.innerText = "Sunrise - " + currentHour1 + ":" + mySR.getMinutes() + `${mySR.getHours > 12 ? "pm" : "am"}`;
 
-        todaySS.innerText = "Sunset - " + currentHour2 + ":" + mySS.getMinutes() + `${mySS.getHours > 12 ? "am" : "pm"}`;
+        // todaySS.innerText = "Sunset - " + currentHour2 + ":" + mySS.getMinutes() + `${mySS.getHours > 12 ? "am" : "pm"}`;
     });
 
 }
@@ -466,6 +534,172 @@ function oneCall(url) {
         // console.log("Sunday Temp: " + oneCallData.daily[4].temp.day + "°F");
         // console.log("Monday Temp: " + oneCallData.daily[5].temp.day + "°F");
         console.log(oneCallData);
+        let date = new Date(oneCallData.current.sunrise * 1000);
+        let date11 = new Date(oneCallData.current.sunset * 1000);
+        console.log(date.toLocaleString("en-US", { timeZone: oneCallData.timezone }));
+        console.log(date11.toLocaleString("en-US", { timeZone: oneCallData.timezone }));
+        // let currentHour1;
+        // switch (mySR.getHours()) {
+        //     case 0:
+        //         currentHour1 = "12";
+        //         break;
+        //     case 1:
+        //         currentHour1 = "1";
+        //         break;
+        //     case 2:
+        //         currentHour1 = "2";
+        //         break;
+        //     case 3:
+        //         currentHour1 = "3";
+        //         break;
+        //     case 4:
+        //         currentHour1 = "4";
+        //         break;
+        //     case 5:
+        //         currentHour1 = "5";
+        //         break;
+        //     case 6:
+        //         currentHour1 = "6";
+        //         break;
+        //     case 7:
+        //         currentHour1 = "7";
+        //         break;
+        //     case 8:
+        //         currentHour1 = "8";
+        //         break;
+        //     case 9:
+        //         currentHour1 = "9";
+        //         break;
+        //     case 10:
+        //         currentHour1 = "10";
+        //         break;
+        //     case 11:
+        //         currentHour1 = "11";
+        //         break;
+        //     case 12:
+        //         currentHour1 = "12";
+        //         break;
+        //     case 13:
+        //         currentHour1 = "1";
+        //         break;
+        //     case 14:
+        //         currentHour1 = "2";
+        //         break;
+        //     case 15:
+        //         currentHour1 = "3";
+        //         break;
+        //     case 16:
+        //         currentHour1 = "4";
+        //         break;
+        //     case 17:
+        //         currentHour1 = "5";
+        //         break;
+        //     case 18:
+        //         currentHour1 = "6";
+        //         break;
+        //     case 19:
+        //         currentHour1 = "7";
+        //         break;
+        //     case 20:
+        //         currentHour1 = "8";
+        //         break;
+        //     case 21:
+        //         currentHour1 = "9";
+        //         break;
+        //     case 22:
+        //         currentHour1 = "10";
+        //         break;
+        //     case 23:
+        //         currentHour1 = "11";
+        //         break;
+        //     default:
+        //         currentHour1 = "12";
+        //         break;
+        // }
+
+        // let currentHour2;
+        // switch (mySS.getHours()) {
+        //     case 0:
+        //         currentHour2 = "12";
+        //         break;
+        //     case 1:
+        //         currentHour2 = "1";
+        //         break;
+        //     case 2:
+        //         currentHour2 = "2";
+        //         break;
+        //     case 3:
+        //         currentHour2 = "3";
+        //         break;
+        //     case 4:
+        //         currentHour2 = "4";
+        //         break;
+        //     case 5:
+        //         currentHour2 = "5";
+        //         break;
+        //     case 6:
+        //         currentHour2 = "6";
+        //         break;
+        //     case 7:
+        //         currentHour2 = "7";
+        //         break;
+        //     case 8:
+        //         currentHour2 = "8";
+        //         break;
+        //     case 9:
+        //         currentHour2 = "9";
+        //         break;
+        //     case 10:
+        //         currentHour2 = "10";
+        //         break;
+        //     case 11:
+        //         currentHour2 = "11";
+        //         break;
+        //     case 12:
+        //         currentHour2 = "12";
+        //         break;
+        //     case 13:
+        //         currentHour2 = "1";
+        //         break;
+        //     case 14:
+        //         currentHour2 = "2";
+        //         break;
+        //     case 15:
+        //         currentHour2 = "3";
+        //         break;
+        //     case 16:
+        //         currentHour2 = "4";
+        //         break;
+        //     case 17:
+        //         currentHour2 = "5";
+        //         break;
+        //     case 18:
+        //         currentHour2 = "6";
+        //         break;
+        //     case 19:
+        //         currentHour2 = "7";
+        //         break;
+        //     case 20:
+        //         currentHour2 = "8";
+        //         break;
+        //     case 21:
+        //         currentHour2 = "9";
+        //         break;
+        //     case 22:
+        //         currentHour2 = "10";
+        //         break;
+        //     case 23:
+        //         currentHour2 = "11";
+        //         break;
+        //     default:
+        //         currentHour2 = "12";
+        //         break;
+        // }
+
+        todaySR.innerText = "Sunrise - " + date.getHours() + ":" + date.getMinutes() + `${date.getHours() > 12 ? "pm" : "am"}`;
+
+        todaySS.innerText = "Sunset - " + date11.getHours() + ":" + date11.getMinutes() + `${date11.getHours() > 12 ? "pm" : "am"}`;
+
         morningTemp.innerHTML = Math.trunc(oneCallData.daily[0].temp.morn) + "°F";
         afternoonTemp.innerHTML = Math.trunc(oneCallData.daily[0].temp.day) + "°F";
         eveningTemp.textContent = Math.trunc(oneCallData.daily[0].temp.night) + "°F";
@@ -639,6 +873,486 @@ function oneCall(url) {
         day3.innerText = currentDay3;
         day4.innerText = currentDay4;
         day5.innerText = currentDay5;
+
+
+
+        //Morning Weather Icon
+        if (oneCallData.hourly[5].weather[0].icon == "01d") {
+            document.getElementById("weather-icon1").src = "icons/01d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "01n") {
+            document.getElementById("weather-icon1").src = "icons/01n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "02d") {
+            document.getElementById("weather-icon1").src = "icons/02d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "02n") {
+            document.getElementById("weather-icon1").src = "icons/02n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "03d") {
+            document.getElementById("weather-icon1").src = "icons/03d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "03n") {
+            document.getElementById("weather-icon1").src = "icons/03n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "04d") {
+            document.getElementById("weather-icon1").src = "icons/04d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "04n") {
+            document.getElementById("weather-icon1").src = "icons/04n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "09d") {
+            document.getElementById("weather-icon1").src = "icons/09d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "09n") {
+            document.getElementById("weather-icon1").src = "icons/09n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "10d") {
+            document.getElementById("weather-icon1").src = "icons/10d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "10n") {
+            document.getElementById("weather-icon1").src = "icons/10n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "11d") {
+            document.getElementById("weather-icon1").src = "icons/11d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "11n") {
+            document.getElementById("weather-icon1").src = "icons/11n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "13d") {
+            document.getElementById("weather-icon1").src = "icons/13d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "13n") {
+            document.getElementById("weather-icon1").src = "icons/13n.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "50d") {
+            document.getElementById("weather-icon1").src = "icons/50d.png";
+        }
+        else if (oneCallData.hourly[5].weather[0].icon == "50n") {
+            document.getElementById("weather-icon1").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon1").src = "icons/unknown.png";
+
+
+
+        //Afternoon Weather Icon
+        if (oneCallData.hourly[13].weather[0].icon == "01d") {
+            document.getElementById("weather-icon2").src = "icons/01d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "01n") {
+            document.getElementById("weather-icon2").src = "icons/01n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "02d") {
+            document.getElementById("weather-icon2").src = "icons/02d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "02n") {
+            document.getElementById("weather-icon2").src = "icons/02n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "03d") {
+            document.getElementById("weather-icon2").src = "icons/03d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "03n") {
+            document.getElementById("weather-icon2").src = "icons/03n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "04d") {
+            document.getElementById("weather-icon2").src = "icons/04d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "04n") {
+            document.getElementById("weather-icon2").src = "icons/04n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "09d") {
+            document.getElementById("weather-icon2").src = "icons/09d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "09n") {
+            document.getElementById("weather-icon2").src = "icons/09n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "10d") {
+            document.getElementById("weather-icon2").src = "icons/10d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "10n") {
+            document.getElementById("weather-icon2").src = "icons/10n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "11d") {
+            document.getElementById("weather-icon2").src = "icons/11d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "11n") {
+            document.getElementById("weather-icon2").src = "icons/11n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "13d") {
+            document.getElementById("weather-icon2").src = "icons/13d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "13n") {
+            document.getElementById("weather-icon2").src = "icons/13n.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "50d") {
+            document.getElementById("weather-icon2").src = "icons/50d.png";
+        }
+        else if (oneCallData.hourly[13].weather[0].icon == "50n") {
+            document.getElementById("weather-icon2").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon2").src = "icons/unknown.png";
+
+
+
+
+        //Evening Weather Icon
+        if (oneCallData.hourly[21].weather[0].icon == "01d") {
+            document.getElementById("weather-icon3").src = "icons/01d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "01n") {
+            document.getElementById("weather-icon3").src = "icons/01n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "02d") {
+            document.getElementById("weather-icon3").src = "icons/02d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "02n") {
+            document.getElementById("weather-icon3").src = "icons/02n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "03d") {
+            document.getElementById("weather-icon3").src = "icons/03d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "03n") {
+            document.getElementById("weather-icon3").src = "icons/03n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "04d") {
+            document.getElementById("weather-icon3").src = "icons/04d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "04n") {
+            document.getElementById("weather-icon3").src = "icons/04n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "09d") {
+            document.getElementById("weather-icon3").src = "icons/09d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "09n") {
+            document.getElementById("weather-icon3").src = "icons/09n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "10d") {
+            document.getElementById("weather-icon3").src = "icons/10d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "10n") {
+            document.getElementById("weather-icon3").src = "icons/10n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "11d") {
+            document.getElementById("weather-icon3").src = "icons/11d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "11n") {
+            document.getElementById("weather-icon3").src = "icons/11n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "13d") {
+            document.getElementById("weather-icon3").src = "icons/13d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "13n") {
+            document.getElementById("weather-icon3").src = "icons/13n.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "50d") {
+            document.getElementById("weather-icon3").src = "icons/50d.png";
+        }
+        else if (oneCallData.hourly[21].weather[0].icon == "50n") {
+            document.getElementById("weather-icon3").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon3").src = "icons/unknown.png";
+
+
+
+
+        //Day 1 Weather Icon
+        if (oneCallData.daily[1].weather[0].icon == "01d") {
+            document.getElementById("weather-icon4").src = "icons/01d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "01n") {
+            document.getElementById("weather-icon4").src = "icons/01n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "02d") {
+            document.getElementById("weather-icon4").src = "icons/02d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "02n") {
+            document.getElementById("weather-icon4").src = "icons/02n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "03d") {
+            document.getElementById("weather-icon4").src = "icons/03d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "03n") {
+            document.getElementById("weather-icon4").src = "icons/03n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "04d") {
+            document.getElementById("weather-icon4").src = "icons/04d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "04n") {
+            document.getElementById("weather-icon4").src = "icons/04n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "09d") {
+            document.getElementById("weather-icon4").src = "icons/09d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "09n") {
+            document.getElementById("weather-icon4").src = "icons/09n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "10d") {
+            document.getElementById("weather-icon4").src = "icons/10d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "10n") {
+            document.getElementById("weather-icon4").src = "icons/10n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "11d") {
+            document.getElementById("weather-icon4").src = "icons/11d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "11n") {
+            document.getElementById("weather-icon4").src = "icons/11n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "13d") {
+            document.getElementById("weather-icon4").src = "icons/13d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "13n") {
+            document.getElementById("weather-icon4").src = "icons/13n.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "50d") {
+            document.getElementById("weather-icon4").src = "icons/50d.png";
+        }
+        else if (oneCallData.daily[1].weather[0].icon == "50n") {
+            document.getElementById("weather-icon4").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon4").src = "icons/unknown.png";
+
+        
+        //Day 2 Weather Icon
+        if (oneCallData.daily[2].weather[0].icon == "01d") {
+            document.getElementById("weather-icon5").src = "icons/01d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "01n") {
+            document.getElementById("weather-icon5").src = "icons/01n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "02d") {
+            document.getElementById("weather-icon5").src = "icons/02d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "02n") {
+            document.getElementById("weather-icon5").src = "icons/02n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "03d") {
+            document.getElementById("weather-icon5").src = "icons/03d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "03n") {
+            document.getElementById("weather-icon5").src = "icons/03n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "04d") {
+            document.getElementById("weather-icon5").src = "icons/04d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "04n") {
+            document.getElementById("weather-icon5").src = "icons/04n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "09d") {
+            document.getElementById("weather-icon5").src = "icons/09d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "09n") {
+            document.getElementById("weather-icon5").src = "icons/09n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "10d") {
+            document.getElementById("weather-icon5").src = "icons/10d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "10n") {
+            document.getElementById("weather-icon5").src = "icons/10n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "11d") {
+            document.getElementById("weather-icon5").src = "icons/11d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "11n") {
+            document.getElementById("weather-icon5").src = "icons/11n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "13d") {
+            document.getElementById("weather-icon5").src = "icons/13d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "13n") {
+            document.getElementById("weather-icon5").src = "icons/13n.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "50d") {
+            document.getElementById("weather-icon5").src = "icons/50d.png";
+        }
+        else if (oneCallData.daily[2].weather[0].icon == "50n") {
+            document.getElementById("weather-icon5").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon5").src = "icons/unknown.png";
+
+    
+        //Day 3 Weather Icon
+        if (oneCallData.daily[3].weather[0].icon == "01d") {
+            document.getElementById("weather-icon6").src = "icons/01d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "01n") {
+            document.getElementById("weather-icon6").src = "icons/01n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "02d") {
+            document.getElementById("weather-icon6").src = "icons/02d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "02n") {
+            document.getElementById("weather-icon6").src = "icons/02n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "03d") {
+            document.getElementById("weather-icon6").src = "icons/03d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "03n") {
+            document.getElementById("weather-icon6").src = "icons/03n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "04d") {
+            document.getElementById("weather-icon6").src = "icons/04d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "04n") {
+            document.getElementById("weather-icon6").src = "icons/04n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "09d") {
+            document.getElementById("weather-icon6").src = "icons/09d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "09n") {
+            document.getElementById("weather-icon6").src = "icons/09n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "10d") {
+            document.getElementById("weather-icon6").src = "icons/10d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "10n") {
+            document.getElementById("weather-icon6").src = "icons/10n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "11d") {
+            document.getElementById("weather-icon6").src = "icons/11d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "11n") {
+            document.getElementById("weather-icon6").src = "icons/11n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "13d") {
+            document.getElementById("weather-icon6").src = "icons/13d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "13n") {
+            document.getElementById("weather-icon6").src = "icons/13n.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "50d") {
+            document.getElementById("weather-icon6").src = "icons/50d.png";
+        }
+        else if (oneCallData.daily[3].weather[0].icon == "50n") {
+            document.getElementById("weather-icon6").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon6").src = "icons/unknown.png";
+
+        
+        //Day 4 Weather Icon
+        if (oneCallData.daily[4].weather[0].icon == "01d") {
+            document.getElementById("weather-icon7").src = "icons/01d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "01n") {
+            document.getElementById("weather-icon7").src = "icons/01n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "02d") {
+            document.getElementById("weather-icon7").src = "icons/02d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "02n") {
+            document.getElementById("weather-icon7").src = "icons/02n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "03d") {
+            document.getElementById("weather-icon7").src = "icons/03d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "03n") {
+            document.getElementById("weather-icon7").src = "icons/03n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "04d") {
+            document.getElementById("weather-icon7").src = "icons/04d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "04n") {
+            document.getElementById("weather-icon7").src = "icons/04n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "09d") {
+            document.getElementById("weather-icon7").src = "icons/09d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "09n") {
+            document.getElementById("weather-icon7").src = "icons/09n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "10d") {
+            document.getElementById("weather-icon7").src = "icons/10d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "10n") {
+            document.getElementById("weather-icon7").src = "icons/10n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "11d") {
+            document.getElementById("weather-icon7").src = "icons/11d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "11n") {
+            document.getElementById("weather-icon7").src = "icons/11n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "13d") {
+            document.getElementById("weather-icon7").src = "icons/13d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "13n") {
+            document.getElementById("weather-icon7").src = "icons/13n.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "50d") {
+            document.getElementById("weather-icon7").src = "icons/50d.png";
+        }
+        else if (oneCallData.daily[4].weather[0].icon == "50n") {
+            document.getElementById("weather-icon7").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon7").src = "icons/unknown.png";
+
+
+
+        //Day 5 Weather Icon
+        if (oneCallData.daily[5].weather[0].icon == "01d") {
+            document.getElementById("weather-icon8").src = "icons/01d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "01n") {
+            document.getElementById("weather-icon8").src = "icons/01n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "02d") {
+            document.getElementById("weather-icon8").src = "icons/02d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "02n") {
+            document.getElementById("weather-icon8").src = "icons/02n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "03d") {
+            document.getElementById("weather-icon8").src = "icons/03d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "03n") {
+            document.getElementById("weather-icon8").src = "icons/03n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "04d") {
+            document.getElementById("weather-icon8").src = "icons/04d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "04n") {
+            document.getElementById("weather-icon8").src = "icons/04n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "09d") {
+            document.getElementById("weather-icon8").src = "icons/09d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "09n") {
+            document.getElementById("weather-icon8").src = "icons/09n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "10d") {
+            document.getElementById("weather-icon8").src = "icons/10d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "10n") {
+            document.getElementById("weather-icon8").src = "icons/10n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "11d") {
+            document.getElementById("weather-icon8").src = "icons/11d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "11n") {
+            document.getElementById("weather-icon8").src = "icons/11n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "13d") {
+            document.getElementById("weather-icon8").src = "icons/13d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "13n") {
+            document.getElementById("weather-icon8").src = "icons/13n.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "50d") {
+            document.getElementById("weather-icon8").src = "icons/50d.png";
+        }
+        else if (oneCallData.daily[5].weather[0].icon == "50n") {
+            document.getElementById("weather-icon8").src = "icons/50n.png";
+        }
+        else
+            document.getElementById("weather-icon8").src = "icons/unknown.png";
+
     });
 }
 

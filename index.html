@@ -99,24 +99,30 @@ Desktop Weather Application
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-2">
-                                    <div class="weather-icon"><img src="icons/unknown.png"></div>
-                                    <!-- <i id="currentWeatherIcon"><ion-icon name="sunny" style="width: 200px; height: 200px" class="sun mt-4"></ion-icon></i> -->
+                                <div class="col-3">
+                                    <img id="weather-icon" style="width: 250px; height: 240px" class="mt-2 px-2" src="icons/unknown.png" >
                                 </div>
-                                <div class="col-10">
+                                <div class="col-9">
                                     <p class="px-3 noPadding tempNow" id="currentTemp">&nbsp;55°F</p>
 
                                 </div>
                             </div>
-                            <div class="row mt-4">
-                                <div class="col-12">
-                                    <p class="px-3 sunSetting" id="todaySR"><i data-feather="sunrise" style="width: 40px; height: 40px" class="mb-3"></i>&nbsp; Sunrise - 7:08am</p>
+                            <div class="row ">
+                                <div class="col-1 px-4">
+                                    <i data-feather="sunrise" style="width: 40px; height: 40px" class="mb-3"></i>
+                                </div>
+                                <div class="col-11 py-1 ">
+                                    <p class="py-2 sunSetting" id="todaySR">Sunrise - 7:08am</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12">
-                                    <p class="px-3 sunSetting" id="todaySS"><i data-feather="sunset" style="width: 40px; height: 40px"class=""></i>&nbsp; Sunset - 4:45pm</p>
+                                <div class="col-1 px-4">
+                                    <i data-feather="sunset" style="width: 40px; height: 40px" class="mb-3"></i>
                                 </div>
+                                <div class="col-11 py-1 ">
+                                    <p class="py-2 sunSetting" id="todaySS"> Sunset - 7:08am</p>
+                                </div>
+                                
                             </div>
                             <br>
                             <div class="row">
@@ -208,7 +214,7 @@ Desktop Weather Application
                                             <p class="noPadding text-end detailWeather"id="todayCloud">1%&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4 ">
-                                            <p class="weatherBorders"></p>
+                                            <p class="weatherBorders mb-1"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +238,7 @@ Desktop Weather Application
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 140px; height: 120px"></ion-icon>
+                                                <img id="weather-icon1" style="widows: 130px; height: 130px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp"id="morningTemp">50°F</p>
                                                 <p class="card-text cardDay mt-4 mb-4">Morning</p>
                                             </div>
@@ -241,7 +247,7 @@ Desktop Weather Application
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <ion-icon class="weatherIconCloud" name="partly-sunny" style="width: 140px; height: 120px"></ion-icon>
+                                                <img id="weather-icon2" style="widows: 130px; height: 130px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="afternoonTemp">50°F</p>
                                                 <p class="card-text cardDay mt-4 mb-4">Afternoon</p>
                                             </div>
@@ -250,7 +256,7 @@ Desktop Weather Application
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <ion-icon class="sun" name="sunny" style="width: 140px; height: 120px"></ion-icon>
+                                                <img id="weather-icon3" style="widows: 130px; height: 130px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="eveningTemp">50°F</p>
                                                 <p class="card-text cardDay mt-4 mb-4">Evening</p>
                                             </div>
@@ -273,7 +279,7 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
+                                                <img id="weather-icon4" style="widows: 120px; height: 120px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day1Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day1">Tues.</p>
                                                 <p class="cardDate" id="date1">12/8/20</p>
@@ -284,7 +290,7 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
+                                                <img id="weather-icon5" style="widows: 120px; height: 120px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp"id="day2Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3"id="day2">Weds.</p>
                                                 <p class="cardDate" id="date2">12/9/20</p>
@@ -295,7 +301,7 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
+                                                <img id="weather-icon6" style="widows: 120px; height: 120px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day3Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day3">Thurs.</p>
                                                 <p class="cardDate" id="date3">12/10/20</p>
@@ -306,7 +312,7 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
+                                                <img id="weather-icon7" style="widows: 120px; height: 120px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day4Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day4">Fri.</p>
                                                 <p class="cardDate" id="date4">12/11/20</p>
@@ -317,7 +323,7 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <ion-icon class="weatherIconCloud" name="cloud" style="width: 120px; height: 120px"></ion-icon>
+                                                <img id="weather-icon8" style="widows: 120px; height: 120px" src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day5Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day5">Sat.</p>
                                                 <p class="cardDate" id="date5">12/12/20</p>
