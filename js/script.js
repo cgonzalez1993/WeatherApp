@@ -6,11 +6,7 @@ let url_pt3 = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat 
 let city = "manteca, ca, us," + "&units=imperial";
 let apikey = "&appid=3bdbeade6189c91354f9f969824f70b6";
 
-let cityArray = [];
-let location1 = document.getElementById("location1");
 let currentTemp = document.getElementById("currentTemp");
-
-
 let todayDate = document.getElementById("todayDate");
 let todayFeelsLike = document.getElementById("todayFeelsLike");
 let todayWindSpeed = document.getElementById("todayWindSpeed");
@@ -42,31 +38,127 @@ let date5 = document.getElementById("date5");
 let morningTemp = document.getElementById("morningTemp");
 let afternoonTemp = document.getElementById("afternoonTemp");
 let eveningTemp = document.getElementById("eveningTemp");
-let addFavorites = document.getElementById("addFavroites")
 
-// addFavorites.addEventListener('click',()=>{
-//     saveToLocalStorage(location1.value);
-//     location.innerText = location1.value;
-// });
-
-// function saveToLocalStorage(cityToSave){
-//     cityArray.push(cityToSave);
-//     localStorage.setItem("cities", JSON.stringify(cityArray));
-// }
-
-// function onLoad(){
-//     let localStorageCity = JSON.parse(localStorage.getItem("cities"));
-//     if(localStorageCity != null){
-//         location1.innerText = localStorageCity;
-//     }
-//     else{
-//         location1.innerText = "...";
-//     }
-// }
-// onLoad();
-
+let cityArray = [];
 let citySearch = document.getElementById("citySearch");
 let executeSearch = document.getElementById("executeSearch");
+let addFavorites = document.getElementById("addFavorites")
+let addFavsToModal = document.getElementById("addFavsToModal");
+let yourCity = document.getElementById("yourCity");
+let FavoritesModal = document.getElementById("FavoritesModal");
+
+let data = JSON.parse(localStorage.getItem("Cities"));
+console.log(data);
+
+addFavorites.addEventListener('click', () => {
+    saveToLocalStorage(yourCity.innerText);
+});
+
+FavoritesModal.addEventListener('click', () => {
+    localStorage.setItem("Cities", JSON.stringify(cityArray));
+});
+
+function saveToLocalStorage(cityToSave) {
+
+    let localStorageCity = JSON.parse(localStorage.getItem("Cities"));
+    if (localStorageCity != null) {
+        let cityArray = localStorageCity;
+        cityArray.push(cityToSave);
+        console.log(cityArray);
+        localStorage.setItem("Cities", JSON.stringify(cityArray));
+        appenedElements(cityArray);
+    }
+    else {
+        console.log("empty");
+        cityArray.push(cityToSave);
+        localStorage.setItem("Cities", JSON.stringify(cityArray));
+        appenedElements(cityArray);
+    }
+}
+
+function appenedElements(attach) {
+    addFavsToModal.innerText = "";
+    attach.forEach(angel => {
+        console.log(angel);
+        let cityToSave = angel;
+        let aElement = document.createElement("a");
+        aElement.innerText = cityToSave;
+        aElement.className = "list-group-item list-group-item-action list-group-item-secondary center";
+        aElement.addEventListener("click", () => {
+            console.log(aElement.innerText);
+            loadToday(url_pt1 + aElement.innerText + apikey + "&units=imperial");
+            setTimeout(function () {
+                oneCall(url_pt2 + apikey + "&units=imperial")
+            }, 1250);
+
+            setTimeout(function () {
+                airPollution(url_pt3 + apikey + "&units=imperial")
+            }, 1250);
+
+        });
+        let deleteMe = document.createElement("p");
+        deleteMe.classList.add("px-3", "fas", "black", "fa-trash");
+
+        // deleteMe.addEventListener("click", (e) => {
+        //     console.log(cityArray);
+        //     console.log(e.toElement.parentElement.firstChild.textContent);
+        //     console.log(localStorageCity);
+        //     let locationName = localStorageCity.indexOf(e.toElement.parentElement.firstChild.textContent);
+        //     console.log(locationName);
+        //     localStorageCity.splice(locationName, 1);
+        //     localStorage.setItem("Cities", JSON.stringify(localStorageCity));
+        //     aElement.remove();
+        //     console.log(localStorageCity);
+        // });
+        // aElement.appendChild(deleteMe);
+        // addFavsToModal.appendChild(aElement);
+    })
+}
+
+function onLoad() {
+    let localStorageCity = JSON.parse(localStorage.getItem("Cities"));
+    if (localStorageCity != null) {
+        localStorageCity.forEach(angel => {
+            console.log(angel);
+            let cityToSave = angel;
+            //addFavsToModal.innerText += cityToSave;
+            let aElement = document.createElement("p");
+            aElement.innerText = cityToSave;
+            aElement.className = "list-group-item list-group-item-action list-group-item-secondary center";
+            aElement.addEventListener("click", () => {
+                console.log(aElement.innerText);
+                loadToday(url_pt1 + aElement.innerText + apikey + "&units=imperial");
+                setTimeout(function () {
+                    oneCall(url_pt2 + apikey + "&units=imperial")
+                }, 1250);
+
+                setTimeout(function () {
+                    airPollution(url_pt3 + apikey + "&units=imperial")
+                }, 1250);
+
+            });
+
+            let deleteMe = document.createElement("p");
+            deleteMe.classList.add("px-3", "fas", "black", "fa-trash");
+
+            deleteMe.addEventListener("click", (e) => {
+                console.log(cityArray);
+                console.log(e.toElement.parentElement.firstChild.textContent);
+                console.log(localStorageCity);
+                let locationName = localStorageCity.indexOf(e.toElement.parentElement.firstChild.textContent);
+                console.log(locationName);
+                localStorageCity.splice(locationName, 1);
+                localStorage.setItem("Cities", JSON.stringify(localStorageCity));
+                aElement.remove();
+                console.log(localStorageCity);
+            });
+            aElement.appendChild(deleteMe);
+            addFavsToModal.appendChild(aElement);
+        })
+    }
+}
+onLoad();
+
 
 loadToday(url_pt1 + city + apikey);
 
@@ -136,9 +228,7 @@ function loadToday(url) {
         url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
         url_pt3 = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon;
 
-
-
-        location1.innerHTML = data.name + ", " + data.sys.country;
+        yourCity.innerHTML = data.name + ", " + data.sys.country;
         currentTemp.innerHTML = Math.trunc(data.main.temp) + "°F"
 
         todayFeelsLike.innerHTML = Math.trunc(data.main.feels_like) + "°F&nbsp;&nbsp;";
@@ -154,61 +244,78 @@ function loadToday(url) {
 
         if (data.weather[0].icon == "01d") {
             document.getElementById("weather-icon").src = "icons/01d.png";
+            body.className = "dayTimeBG";
         }
         else if (data.weather[0].icon == "01n") {
             document.getElementById("weather-icon").src = "icons/01n.png";
+            body.className = "nightTimeBG";
         }
         else if (data.weather[0].icon == "02d") {
             document.getElementById("weather-icon").src = "icons/02d.png";
+            body.className = "dayTimeBG";
         }
         else if (data.weather[0].icon == "02n") {
             document.getElementById("weather-icon").src = "icons/02n.png";
+            body.className = "nightTimeBG";
         }
         else if (data.weather[0].icon == "03d") {
             document.getElementById("weather-icon").src = "icons/03d.png";
+            body.className = "dayTimeBG";
         }
         else if (data.weather[0].icon == "03n") {
             document.getElementById("weather-icon").src = "icons/03n.png";
+            body.className = "nightTimeBG";
         }
         else if (data.weather[0].icon == "04d") {
             document.getElementById("weather-icon").src = "icons/04d.png";
+            body.className = "dayTimeBG";
         }
         else if (data.weather[0].icon == "04n") {
             document.getElementById("weather-icon").src = "icons/04n.png";
+            body.className = "nightTimeBG";
         }
         else if (data.weather[0].icon == "09d") {
             document.getElementById("weather-icon").src = "icons/09d.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "09n") {
             document.getElementById("weather-icon").src = "icons/09n.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "10d") {
             document.getElementById("weather-icon").src = "icons/10d.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "10n") {
             document.getElementById("weather-icon").src = "icons/10n.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "11d") {
             document.getElementById("weather-icon").src = "icons/11d.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "11n") {
             document.getElementById("weather-icon").src = "icons/11n.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "13d") {
             document.getElementById("weather-icon").src = "icons/13d.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "13n") {
             document.getElementById("weather-icon").src = "icons/13n.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "50d") {
             document.getElementById("weather-icon").src = "icons/50d.png";
+            body.className = "stormyBG";
         }
         else if (data.weather[0].icon == "50n") {
             document.getElementById("weather-icon").src = "icons/50n.png";
+            body.className = "stormyBG";
         }
         else
             document.getElementById("weather-icon").src = "icons/unknown.png";
-
 
         let month;
         switch (myDate.getMonth()) {
@@ -511,13 +618,8 @@ function loadToday(url) {
                 currentHour2 = "12";
                 break;
         }
-        todayDate.innerText = currentDay + ", " + month + " " + myDate.getDate() + ", " + myDate.getFullYear() + " " + currentHour + ":" + myDate.getMinutes() + ":" + myDate.getSeconds();
-
-        // todaySR.innerText = "Sunrise - " + currentHour1 + ":" + mySR.getMinutes() + `${mySR.getHours > 12 ? "pm" : "am"}`;
-
-        // todaySS.innerText = "Sunset - " + currentHour2 + ":" + mySS.getMinutes() + `${mySS.getHours > 12 ? "am" : "pm"}`;
+        todayDate.innerText = currentDay + ", " + month + " " + myDate.getDate() + ", " + myDate.getFullYear() + " " + currentHour + ":" + myDate.getMinutes() + ":" + myDate.getSeconds() + `${myDate.getHours > 12 ? " PM" : " AM"}`;
     });
-
 }
 
 //Pulling One Call API
@@ -525,180 +627,172 @@ function oneCall(url) {
     fetch(url).then(
         oneCallForecast => oneCallForecast.json()
     ).then(oneCallData => {
-        // console.log("Morning Temp: " + Math.trunc(oneCallData.daily[0].temp.morn) + "°F");
-        // console.log("Afternoon Temp: " + oneCallData.daily[0].temp.day + "°F");
-        // console.log("Evening Temp: " + oneCallData.daily[0].temp.night + "°F");
-        // console.log("Thursday Temp: " + oneCallData.daily[1].temp.day + "°F");
-        // console.log("Friday Temp: " + oneCallData.daily[2].temp.day + "°F");
-        // console.log("Saturday Temp: " + oneCallData.daily[3].temp.day + "°F");
-        // console.log("Sunday Temp: " + oneCallData.daily[4].temp.day + "°F");
-        // console.log("Monday Temp: " + oneCallData.daily[5].temp.day + "°F");
         console.log(oneCallData);
         let date = new Date(oneCallData.current.sunrise * 1000);
         let date11 = new Date(oneCallData.current.sunset * 1000);
         console.log(date.toLocaleString("en-US", { timeZone: oneCallData.timezone }));
         console.log(date11.toLocaleString("en-US", { timeZone: oneCallData.timezone }));
-        // let currentHour1;
-        // switch (mySR.getHours()) {
-        //     case 0:
-        //         currentHour1 = "12";
-        //         break;
-        //     case 1:
-        //         currentHour1 = "1";
-        //         break;
-        //     case 2:
-        //         currentHour1 = "2";
-        //         break;
-        //     case 3:
-        //         currentHour1 = "3";
-        //         break;
-        //     case 4:
-        //         currentHour1 = "4";
-        //         break;
-        //     case 5:
-        //         currentHour1 = "5";
-        //         break;
-        //     case 6:
-        //         currentHour1 = "6";
-        //         break;
-        //     case 7:
-        //         currentHour1 = "7";
-        //         break;
-        //     case 8:
-        //         currentHour1 = "8";
-        //         break;
-        //     case 9:
-        //         currentHour1 = "9";
-        //         break;
-        //     case 10:
-        //         currentHour1 = "10";
-        //         break;
-        //     case 11:
-        //         currentHour1 = "11";
-        //         break;
-        //     case 12:
-        //         currentHour1 = "12";
-        //         break;
-        //     case 13:
-        //         currentHour1 = "1";
-        //         break;
-        //     case 14:
-        //         currentHour1 = "2";
-        //         break;
-        //     case 15:
-        //         currentHour1 = "3";
-        //         break;
-        //     case 16:
-        //         currentHour1 = "4";
-        //         break;
-        //     case 17:
-        //         currentHour1 = "5";
-        //         break;
-        //     case 18:
-        //         currentHour1 = "6";
-        //         break;
-        //     case 19:
-        //         currentHour1 = "7";
-        //         break;
-        //     case 20:
-        //         currentHour1 = "8";
-        //         break;
-        //     case 21:
-        //         currentHour1 = "9";
-        //         break;
-        //     case 22:
-        //         currentHour1 = "10";
-        //         break;
-        //     case 23:
-        //         currentHour1 = "11";
-        //         break;
-        //     default:
-        //         currentHour1 = "12";
-        //         break;
-        // }
+        let currentHour1;
+        switch (mySR.getHours()) {
+            case 0:
+                currentHour1 = "12";
+                break;
+            case 1:
+                currentHour1 = "1";
+                break;
+            case 2:
+                currentHour1 = "2";
+                break;
+            case 3:
+                currentHour1 = "3";
+                break;
+            case 4:
+                currentHour1 = "4";
+                break;
+            case 5:
+                currentHour1 = "5";
+                break;
+            case 6:
+                currentHour1 = "6";
+                break;
+            case 7:
+                currentHour1 = "7";
+                break;
+            case 8:
+                currentHour1 = "8";
+                break;
+            case 9:
+                currentHour1 = "9";
+                break;
+            case 10:
+                currentHour1 = "10";
+                break;
+            case 11:
+                currentHour1 = "11";
+                break;
+            case 12:
+                currentHour1 = "12";
+                break;
+            case 13:
+                currentHour1 = "1";
+                break;
+            case 14:
+                currentHour1 = "2";
+                break;
+            case 15:
+                currentHour1 = "3";
+                break;
+            case 16:
+                currentHour1 = "4";
+                break;
+            case 17:
+                currentHour1 = "5";
+                break;
+            case 18:
+                currentHour1 = "6";
+                break;
+            case 19:
+                currentHour1 = "7";
+                break;
+            case 20:
+                currentHour1 = "8";
+                break;
+            case 21:
+                currentHour1 = "9";
+                break;
+            case 22:
+                currentHour1 = "10";
+                break;
+            case 23:
+                currentHour1 = "11";
+                break;
+            default:
+                currentHour1 = "12";
+                break;
+        }
 
-        // let currentHour2;
-        // switch (mySS.getHours()) {
-        //     case 0:
-        //         currentHour2 = "12";
-        //         break;
-        //     case 1:
-        //         currentHour2 = "1";
-        //         break;
-        //     case 2:
-        //         currentHour2 = "2";
-        //         break;
-        //     case 3:
-        //         currentHour2 = "3";
-        //         break;
-        //     case 4:
-        //         currentHour2 = "4";
-        //         break;
-        //     case 5:
-        //         currentHour2 = "5";
-        //         break;
-        //     case 6:
-        //         currentHour2 = "6";
-        //         break;
-        //     case 7:
-        //         currentHour2 = "7";
-        //         break;
-        //     case 8:
-        //         currentHour2 = "8";
-        //         break;
-        //     case 9:
-        //         currentHour2 = "9";
-        //         break;
-        //     case 10:
-        //         currentHour2 = "10";
-        //         break;
-        //     case 11:
-        //         currentHour2 = "11";
-        //         break;
-        //     case 12:
-        //         currentHour2 = "12";
-        //         break;
-        //     case 13:
-        //         currentHour2 = "1";
-        //         break;
-        //     case 14:
-        //         currentHour2 = "2";
-        //         break;
-        //     case 15:
-        //         currentHour2 = "3";
-        //         break;
-        //     case 16:
-        //         currentHour2 = "4";
-        //         break;
-        //     case 17:
-        //         currentHour2 = "5";
-        //         break;
-        //     case 18:
-        //         currentHour2 = "6";
-        //         break;
-        //     case 19:
-        //         currentHour2 = "7";
-        //         break;
-        //     case 20:
-        //         currentHour2 = "8";
-        //         break;
-        //     case 21:
-        //         currentHour2 = "9";
-        //         break;
-        //     case 22:
-        //         currentHour2 = "10";
-        //         break;
-        //     case 23:
-        //         currentHour2 = "11";
-        //         break;
-        //     default:
-        //         currentHour2 = "12";
-        //         break;
-        // }
+        let currentHour2;
+        switch (mySS.getHours()) {
+            case 0:
+                currentHour2 = "12";
+                break;
+            case 1:
+                currentHour2 = "1";
+                break;
+            case 2:
+                currentHour2 = "2";
+                break;
+            case 3:
+                currentHour2 = "3";
+                break;
+            case 4:
+                currentHour2 = "4";
+                break;
+            case 5:
+                currentHour2 = "5";
+                break;
+            case 6:
+                currentHour2 = "6";
+                break;
+            case 7:
+                currentHour2 = "7";
+                break;
+            case 8:
+                currentHour2 = "8";
+                break;
+            case 9:
+                currentHour2 = "9";
+                break;
+            case 10:
+                currentHour2 = "10";
+                break;
+            case 11:
+                currentHour2 = "11";
+                break;
+            case 12:
+                currentHour2 = "12";
+                break;
+            case 13:
+                currentHour2 = "1";
+                break;
+            case 14:
+                currentHour2 = "2";
+                break;
+            case 15:
+                currentHour2 = "3";
+                break;
+            case 16:
+                currentHour2 = "4";
+                break;
+            case 17:
+                currentHour2 = "5";
+                break;
+            case 18:
+                currentHour2 = "6";
+                break;
+            case 19:
+                currentHour2 = "7";
+                break;
+            case 20:
+                currentHour2 = "8";
+                break;
+            case 21:
+                currentHour2 = "9";
+                break;
+            case 22:
+                currentHour2 = "10";
+                break;
+            case 23:
+                currentHour2 = "11";
+                break;
+            default:
+                currentHour2 = "12";
+                break;
+        }
 
-        todaySR.innerText = "Sunrise - " + date.getHours() + ":" + date.getMinutes() + `${date.getHours() > 12 ? "pm" : "am"}`;
+        todaySR.innerText = "Sunrise - " + currentHour1 + ":" + date.getMinutes() + `${date.getHours() > 12 ? "pm" : "am"}`;
 
-        todaySS.innerText = "Sunset - " + date11.getHours() + ":" + date11.getMinutes() + `${date11.getHours() > 12 ? "pm" : "am"}`;
+        todaySS.innerText = "Sunset - " + currentHour2 + ":" + date11.getMinutes() + `${date11.getHours() > 12 ? "pm" : "am"}`;
 
         morningTemp.innerHTML = Math.trunc(oneCallData.daily[0].temp.morn) + "°F";
         afternoonTemp.innerHTML = Math.trunc(oneCallData.daily[0].temp.day) + "°F";
@@ -874,8 +968,6 @@ function oneCall(url) {
         day4.innerText = currentDay4;
         day5.innerText = currentDay5;
 
-
-
         //Morning Weather Icon
         if (oneCallData.hourly[5].weather[0].icon == "01d") {
             document.getElementById("weather-icon1").src = "icons/01d.png";
@@ -933,8 +1025,6 @@ function oneCall(url) {
         }
         else
             document.getElementById("weather-icon1").src = "icons/unknown.png";
-
-
 
         //Afternoon Weather Icon
         if (oneCallData.hourly[13].weather[0].icon == "01d") {
@@ -994,9 +1084,6 @@ function oneCall(url) {
         else
             document.getElementById("weather-icon2").src = "icons/unknown.png";
 
-
-
-
         //Evening Weather Icon
         if (oneCallData.hourly[21].weather[0].icon == "01d") {
             document.getElementById("weather-icon3").src = "icons/01d.png";
@@ -1054,9 +1141,6 @@ function oneCall(url) {
         }
         else
             document.getElementById("weather-icon3").src = "icons/unknown.png";
-
-
-
 
         //Day 1 Weather Icon
         if (oneCallData.daily[1].weather[0].icon == "01d") {
@@ -1116,7 +1200,6 @@ function oneCall(url) {
         else
             document.getElementById("weather-icon4").src = "icons/unknown.png";
 
-        
         //Day 2 Weather Icon
         if (oneCallData.daily[2].weather[0].icon == "01d") {
             document.getElementById("weather-icon5").src = "icons/01d.png";
@@ -1175,7 +1258,6 @@ function oneCall(url) {
         else
             document.getElementById("weather-icon5").src = "icons/unknown.png";
 
-    
         //Day 3 Weather Icon
         if (oneCallData.daily[3].weather[0].icon == "01d") {
             document.getElementById("weather-icon6").src = "icons/01d.png";
@@ -1234,7 +1316,6 @@ function oneCall(url) {
         else
             document.getElementById("weather-icon6").src = "icons/unknown.png";
 
-        
         //Day 4 Weather Icon
         if (oneCallData.daily[4].weather[0].icon == "01d") {
             document.getElementById("weather-icon7").src = "icons/01d.png";
@@ -1293,8 +1374,6 @@ function oneCall(url) {
         else
             document.getElementById("weather-icon7").src = "icons/unknown.png";
 
-
-
         //Day 5 Weather Icon
         if (oneCallData.daily[5].weather[0].icon == "01d") {
             document.getElementById("weather-icon8").src = "icons/01d.png";
@@ -1352,7 +1431,6 @@ function oneCall(url) {
         }
         else
             document.getElementById("weather-icon8").src = "icons/unknown.png";
-
     });
 }
 
@@ -1385,4 +1463,3 @@ function airPollution(url) {
         }
     });
 }
-

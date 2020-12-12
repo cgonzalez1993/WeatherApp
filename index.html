@@ -1,6 +1,6 @@
 <!--
 Carlos Gonzalez
-12/10/2020
+12/11/2020
 Sprint Week 2
 Desktop Weather Application
 -->
@@ -19,13 +19,13 @@ Desktop Weather Application
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
     <title>Weather Thingy</title>
 </head>
 
-<body class="dayTimeBG">
+<body id="body" class="dayTimeBG">
 
     <!--Navbar Code-->
     <div class="row navBar">
@@ -37,13 +37,14 @@ Desktop Weather Application
 
                 <div class="input-group me-4">
 
-                    <button id="executeSearch" class="input-group-text searchBtn"><i class="fas fa-search fa-2x"></i></button>
+                    <button id="executeSearch" class="input-group-text searchBtn"><i
+                            class="fas fa-search fa-2x"></i></button>
 
                     <input type="text" class="form-control searchForm searchText" id="citySearch"
                         placeholder="(City), (State/Country)">
                 </div>
 
-                <button  type="button" class="favBtn me-4 px-5" data-bs-toggle="modal" data-bs-target="#favsModal">
+                <button type="button" class="favBtn me-4 px-5" data-bs-toggle="modal" data-bs-target="#favsModal">
                     <i class="fas fa-star fa-lg "></i>&nbsp;&nbsp;&nbsp;&nbsp;Favorites</button>
                 </button>
             </form>
@@ -51,27 +52,22 @@ Desktop Weather Application
     </div>
 
 
-
     <!-- Modal -->
     <div class="modal fade" id="favsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title modalText" id="FavoritesModal"><i class="fas fa-star fa-xs"></i> &nbsp;Favorites</h5>
+                    <h5 class="modal-title modalText" id="FavoritesModal"><i class="fas fa-star fa-xs"></i>
+                        &nbsp;Favorites</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body ">
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary center">Stockton, CA</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary center">Taumatawh...,NZ</a>
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-secondary center">Manteca, US</a>
+                <div class="modal-body" id="addFavsToModal">
+                    
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Button trigger modal -->
-    
-    
 
     <!--Body Code-->
     <div class="container-fluid">
@@ -85,7 +81,8 @@ Desktop Weather Application
                                     <h2 class="px-3 subtitle">Current Weather</h2>
                                 </div>
                                 <div class="col-3 mt-3 px-0">
-                                    <a class="btn btn-primary addbtnFav" id="addFavorites" style="width: 205px; height: 49px">+ Add to Favorites</a>
+                                    <a class="btn btn-primary addbtnFav" id="addFavorites"
+                                        style="width: 205px; height: 49px">+ Add to Favorites</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -95,12 +92,13 @@ Desktop Weather Application
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <p class="px-3 cityName mt-2" id="location1">Manteca, CA</p>
+                                    <p class="px-3 cityName mt-2" id="yourCity">Manteca, US</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-3">
-                                    <img id="weather-icon" style="width: 250px; height: 240px" class="mt-2 px-2" src="icons/unknown.png" >
+                                    <img id="weather-icon" style="width: 250px; height: 240px" class="mt-2 px-2"
+                                        src="icons/unknown.png">
                                 </div>
                                 <div class="col-9">
                                     <p class="px-3 noPadding tempNow" id="currentTemp">&nbsp;55°F</p>
@@ -122,7 +120,7 @@ Desktop Weather Application
                                 <div class="col-11 py-1 ">
                                     <p class="py-2 sunSetting" id="todaySS"> Sunset - 7:08am</p>
                                 </div>
-                                
+
                             </div>
                             <br>
                             <div class="row">
@@ -132,7 +130,8 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Feels like: </p>
                                         </div>
                                         <div class="col-6 ">
-                                            <p class="text-end noPadding detailWeather" id="todayFeelsLike">58°F&nbsp;&nbsp;</p>
+                                            <p class="text-end noPadding detailWeather" id="todayFeelsLike">
+                                                58°F&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -143,7 +142,8 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Wind Speed:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather" id="todayWindSpeed">11mph&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayWindSpeed">
+                                                11mph&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -151,10 +151,11 @@ Desktop Weather Application
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-6">
-                                            <p class="noPadding detailWeather" >&nbsp;&nbsp;Humidity:</p>
+                                            <p class="noPadding detailWeather">&nbsp;&nbsp;Humidity:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather" id="todayHumidity">53%&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayHumidity">
+                                                53%&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -165,7 +166,8 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Pressure: </p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather" id="todayPressure">30.17 inches&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayPressure">30.17
+                                                inches&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders "></p>
@@ -178,7 +180,8 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;AQI: </p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather aqi" id="todayAQI">Good&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather aqi" id="todayAQI">
+                                                Good&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders "></p>
@@ -189,7 +192,8 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;UV Index: </p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather"id="todayUVindex">0.47&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayUVindex">
+                                                0.47&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -200,7 +204,8 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Visibility:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather"id="todayVisibility">10mi&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayVisibility">
+                                                10mi&nbsp;&nbsp;</p>
                                         </div>
                                         <div class="col-12 px-4">
                                             <p class="weatherBorders"></p>
@@ -211,7 +216,8 @@ Desktop Weather Application
                                             <p class="noPadding detailWeather">&nbsp;&nbsp;Cloud:</p>
                                         </div>
                                         <div class="col-6">
-                                            <p class="noPadding text-end detailWeather"id="todayCloud">1%&nbsp;&nbsp;</p>
+                                            <p class="noPadding text-end detailWeather" id="todayCloud">1%&nbsp;&nbsp;
+                                            </p>
                                         </div>
                                         <div class="col-12 px-4 ">
                                             <p class="weatherBorders mb-1"></p>
@@ -223,7 +229,7 @@ Desktop Weather Application
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-6">
                 <div class="row">
                     <div class="col-12">
@@ -238,8 +244,9 @@ Desktop Weather Application
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <img id="weather-icon1" style="widows: 130px; height: 130px" src="icons/unknown.png">
-                                                <p class="card-title cardTemp"id="morningTemp">50°F</p>
+                                                <img id="weather-icon1" style="widows: 130px; height: 130px"
+                                                    src="icons/unknown.png">
+                                                <p class="card-title cardTemp" id="morningTemp">50°F</p>
                                                 <p class="card-text cardDay mt-4 mb-4">Morning</p>
                                             </div>
                                         </div>
@@ -247,7 +254,8 @@ Desktop Weather Application
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <img id="weather-icon2" style="widows: 130px; height: 130px" src="icons/unknown.png">
+                                                <img id="weather-icon2" style="widows: 130px; height: 130px"
+                                                    src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="afternoonTemp">50°F</p>
                                                 <p class="card-text cardDay mt-4 mb-4">Afternoon</p>
                                             </div>
@@ -256,7 +264,8 @@ Desktop Weather Application
                                     <div class="col-4">
                                         <div class="text-center">
                                             <div class="card-body">
-                                                <img id="weather-icon3" style="widows: 130px; height: 130px" src="icons/unknown.png">
+                                                <img id="weather-icon3" style="widows: 130px; height: 130px"
+                                                    src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="eveningTemp">50°F</p>
                                                 <p class="card-text cardDay mt-4 mb-4">Evening</p>
                                             </div>
@@ -279,55 +288,60 @@ Desktop Weather Application
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <img id="weather-icon4" style="widows: 120px; height: 120px" src="icons/unknown.png">
+                                                <img id="weather-icon4" style="widows: 120px; height: 120px"
+                                                    src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day1Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day1">Tues.</p>
                                                 <p class="cardDate" id="date1">12/8/20</p>
-                                
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <img id="weather-icon5" style="widows: 120px; height: 120px" src="icons/unknown.png">
-                                                <p class="card-title cardTemp"id="day2Temp">50°F</p>
-                                                <p class="card-text cardDay mt-3"id="day2">Weds.</p>
+                                                <img id="weather-icon5" style="widows: 120px; height: 120px"
+                                                    src="icons/unknown.png">
+                                                <p class="card-title cardTemp" id="day2Temp">50°F</p>
+                                                <p class="card-text cardDay mt-3" id="day2">Weds.</p>
                                                 <p class="cardDate" id="date2">12/9/20</p>
-                                
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <img id="weather-icon6" style="widows: 120px; height: 120px" src="icons/unknown.png">
+                                                <img id="weather-icon6" style="widows: 120px; height: 120px"
+                                                    src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day3Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day3">Thurs.</p>
                                                 <p class="cardDate" id="date3">12/10/20</p>
-                                
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <img id="weather-icon7" style="widows: 120px; height: 120px" src="icons/unknown.png">
+                                                <img id="weather-icon7" style="widows: 120px; height: 120px"
+                                                    src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day4Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day4">Fri.</p>
                                                 <p class="cardDate" id="date4">12/11/20</p>
-                                    
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="text-center">
                                             <div class="card-body noPadding">
-                                                <img id="weather-icon8" style="widows: 120px; height: 120px" src="icons/unknown.png">
+                                                <img id="weather-icon8" style="widows: 120px; height: 120px"
+                                                    src="icons/unknown.png">
                                                 <p class="card-title cardTemp" id="day5Temp">50°F</p>
                                                 <p class="card-text cardDay mt-3" id="day5">Sat.</p>
                                                 <p class="cardDate" id="date5">12/12/20</p>
-                                    
+
                                             </div>
                                         </div>
                                     </div>
@@ -342,9 +356,6 @@ Desktop Weather Application
     </div>
 
 
-<script>
-    feather.replace()
-</script>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -354,7 +365,11 @@ Desktop Weather Application
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
     <script src="./js/script.js"></script>
-    
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace()
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
