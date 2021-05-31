@@ -1,7 +1,7 @@
 let lon;
 let lat;
 let url_pt1 = "http://api.openweathermap.org/data/2.5/weather?q=";
-let url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
+let url_pt2 = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
 let url_pt3 = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon;
 let city = "manteca, ca, us," + "&units=imperial";
 let apikey = "&appid=3bdbeade6189c91354f9f969824f70b6";
