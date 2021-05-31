@@ -77,8 +77,8 @@ function saveToLocalStorage(cityToSave) {
             localStorage.setItem("Cities", JSON.stringify(cityArray));
             appenedElements(cityArray);
         }
-        location.reload();
-        return false;
+        // location.reload();
+        // return false;
     }, 100)
 }
 
