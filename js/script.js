@@ -42,7 +42,7 @@ let eveningTemp = document.getElementById("eveningTemp");
 let cityArray = [];
 let citySearch = document.getElementById("citySearch");
 let executeSearch = document.getElementById("executeSearch");
-let addFavorites = document.getElementById("addFavorites")
+let addFavorites = document.getElementById("addFavorites");
 let addFavsToModal = document.getElementById("addFavsToModal");
 let yourCity = document.getElementById("yourCity");
 let FavoritesModal = document.getElementById("FavoritesModal");
@@ -59,28 +59,38 @@ FavoritesModal.addEventListener('click', () => {
 });
 
 function saveToLocalStorage(cityToSave) {
-
     let localStorageCity = JSON.parse(localStorage.getItem("Cities"));
-    if (localStorageCity != null) {
-        let cityArray = localStorageCity;
-        cityArray.push(cityToSave);
-        console.log(cityArray);
-        localStorage.setItem("Cities", JSON.stringify(cityArray));
-        appenedElements(cityArray);
-    }
-    else {
-        console.log("empty");
-        cityArray.push(cityToSave);
-        localStorage.setItem("Cities", JSON.stringify(cityArray));
-        appenedElements(cityArray);
-    }
+    setTimeout(function () {
+        if (localStorageCity == null) {
+            console.log("empty");
+            cityArray.push(cityToSave);
+            localStorage.setItem("Cities", JSON.stringify(cityArray));
+            appenedElements(cityArray);
+        }
+        else if (localStorageCity.includes(yourCity.innerText) == true) {
+            alert("This city has already been favorited!");
+        }
+        else {
+            let cityArray = localStorageCity;
+            cityArray.push(cityToSave);
+            console.log(cityArray);
+            localStorage.setItem("Cities", JSON.stringify(cityArray));
+            appenedElements(cityArray);
+        }
+        location.reload();
+        return false;
+    }, 100)
 }
 
 function appenedElements(attach) {
-    addFavsToModal.innerText = "";
-    attach.forEach(angel => {
-        console.log(angel);
-        let cityToSave = angel;
+    let localStorageCity = JSON.parse(localStorage.getItem("Cities"));
+    addFavorites.className = "btn btn-danger addbtnFav";
+
+    // addFavsToModal.innerText = "";F
+    attach.forEach(x => {
+        console.log(x);
+
+        let cityToSave = x;
         let aElement = document.createElement("a");
         aElement.innerText = cityToSave;
         aElement.className = "list-group-item list-group-item-action list-group-item-secondary center";
@@ -96,32 +106,36 @@ function appenedElements(attach) {
             }, 1250);
 
         });
-        let deleteMe = document.createElement("p");
-        deleteMe.classList.add("px-3", "fas", "black", "fa-trash");
+        if (localStorageCity.includes(yourCity.innerText) == true) {
 
-        // deleteMe.addEventListener("click", (e) => {
-        //     console.log(cityArray);
-        //     console.log(e.toElement.parentElement.firstChild.textContent);
-        //     console.log(localStorageCity);
-        //     let locationName = localStorageCity.indexOf(e.toElement.parentElement.firstChild.textContent);
-        //     console.log(locationName);
-        //     localStorageCity.splice(locationName, 1);
-        //     localStorage.setItem("Cities", JSON.stringify(localStorageCity));
-        //     aElement.remove();
-        //     console.log(localStorageCity);
-        // });
-        // aElement.appendChild(deleteMe);
-        // addFavsToModal.appendChild(aElement);
+        }
+        let deleteMe = document.createElement("p");
+        deleteMe.classList.add("px-3", "fas", "red", "fa-trash");
+
+        deleteMe.addEventListener("click", (e) => {
+            console.log(e.toElement.parentElement.firstChild.textContent);
+            console.log(localStorageCity);
+            let locationName = localStorageCity.indexOf(e.toElement.parentElement.firstChild.textContent);
+            console.log(locationName);
+            localStorageCity.splice(locationName, 1);
+            localStorage.setItem("Cities", JSON.stringify(localStorageCity));
+            aElement.remove();
+            console.log(localStorageCity);
+        });
+        aElement.appendChild(deleteMe);
+        addFavsToModal.appendChild(aElement);
     })
 }
 
 function onLoad() {
+    // checkIfExist();
+
     let localStorageCity = JSON.parse(localStorage.getItem("Cities"));
+
     if (localStorageCity != null) {
-        localStorageCity.forEach(angel => {
-            console.log(angel);
-            let cityToSave = angel;
-            //addFavsToModal.innerText += cityToSave;
+        localStorageCity.forEach(x => {
+            console.log(x);
+            let cityToSave = x;
             let aElement = document.createElement("p");
             aElement.innerText = cityToSave;
             aElement.className = "list-group-item list-group-item-action list-group-item-secondary center";
@@ -139,10 +153,9 @@ function onLoad() {
             });
 
             let deleteMe = document.createElement("p");
-            deleteMe.classList.add("px-3", "fas", "black", "fa-trash");
+            deleteMe.classList.add("px-3", "fas", "red", "fa-trash");
 
             deleteMe.addEventListener("click", (e) => {
-                console.log(cityArray);
                 console.log(e.toElement.parentElement.firstChild.textContent);
                 console.log(localStorageCity);
                 let locationName = localStorageCity.indexOf(e.toElement.parentElement.firstChild.textContent);
@@ -159,6 +172,20 @@ function onLoad() {
 }
 onLoad();
 
+function checkIfExist() {
+    let localStorageCity = JSON.parse(localStorage.getItem("Cities"));
+    if(localStorageCity == null){
+        return;
+    }
+    else if (localStorageCity.includes(yourCity.innerText) == true) {
+        addFavorites.className = "btn btn-danger addbtnFav";
+        // addFavorties.innerText = "- Remove Favorite";
+    }
+    else if(localStorageCity.includes(yourCity.innerText) == false){
+        addFavorites.className = "btn btn-primary addbtnFav";
+        // addFavorties.innerHTML = "+ Add to Favorites";
+    }
+}
 
 loadToday(url_pt1 + city + apikey);
 
