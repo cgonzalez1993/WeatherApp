@@ -252,7 +252,7 @@ function loadToday(url) {
         console.log(data);
         lon = data.coord.lon;
         lat = data.coord.lat;
-        url_pt2 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
+        url_pt2 = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial";
         url_pt3 = "http://api.openweathermap.org/data/2.5/air_pollution?lat=" + lat + "&lon=" + lon;
 
         yourCity.innerHTML = data.name + ", " + data.sys.country;
